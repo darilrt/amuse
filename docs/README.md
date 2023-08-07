@@ -65,6 +65,30 @@ The graphics module is based on OpenGL 3.3.
 
 Window class for creating and managing a window.
 
+#### Methods
+
+- [Window()](#window)
+- [Window(int width, int height)](#windowint-width-int-height)
+- [Window(const char* title, int width, int height)](#windowconst-char-title-int-width-int-height)
+- [~Window()](#window)
+- [Window::SwapBuffers()](#windowswapbuffers) 
+- [Window::SetTitle(const char* title)](#windowsettitleconst-char-title)
+- [Window::SetSize(int width, int height)](#windowsetsizeint-width-int-height)
+- [Window::SetFullscreen(bool fullscreen)](#windowsetfullscreenbool-fullscreen)
+- [Window::SetVSync(bool vsync)](#windowsetvsyncbool-vsync)
+- [Window::SetCursorVisible(bool visible)](#windowsetcursorvisiblebool-visible)
+- [Window::SetCursorLocked(bool locked)](#windowsetcursorlockedbool-locked)
+- [Window::SetCursor(int x, int y)](#windowsetcursorint-x-int-y)
+- [Window::SetCursor(glm::ivec2 position)](#windowsetcursorglmivec2-position)
+- [Window::SetRelativeCursorMode(bool relative)](#windowsetrelativecursormodebool-relative)
+- [Window::SetCursorConfine(bool confine)](#windowsetcursorconfinebool-confine)
+- [Window::GetCursor(int* x, int* y)](#windowgetcursorint-x-int-y)
+- [Window::GetWidth()](#windowgetwidth)
+- [Window::GetHeight()](#windowgetheight)
+- [Window::IsOpen()](#windowisopen)
+- [Window::Close()](#windowclose)
+    
+
 #### Constructors
 
 ```c++
@@ -91,26 +115,6 @@ Constructs a window with the specified title, width, and height.
 ```	
 
 Destructs the window.
-
-#### Methods
-
-- [Window::SwapBuffers()](#windowswapbuffers) 
-- [Window::SetTitle(const char* title)](#windowsettitleconst-char-title)
-- [Window::SetSize(int width, int height)](#windowsetsizeint-width-int-height)
-- [Window::SetFullscreen(bool fullscreen)](#windowsetfullscreenbool-fullscreen)
-- [Window::SetVSync(bool vsync)](#windowsetvsyncbool-vsync)
-- [Window::SetCursorVisible(bool visible)](#windowsetcursorvisiblebool-visible)
-- [Window::SetCursorLocked(bool locked)](#windowsetcursorlockedbool-locked)
-- [Window::SetCursor(int x, int y)](#windowsetcursorint-x-int-y)
-- [Window::SetCursor(glm::ivec2 position)](#windowsetcursorglmivec2-position)
-- [Window::SetRelativeCursorMode(bool relative)](#windowsetrelativecursormodebool-relative)
-- [Window::SetCursorConfine(bool confine)](#windowsetcursorconfinebool-confine)
-- [Window::GetCursor(int* x, int* y)](#windowgetcursorint-x-int-y)
-- [Window::GetWidth()](#windowgetwidth)
-- [Window::GetHeight()](#windowgetheight)
-- [Window::IsOpen()](#windowisopen)
-- [Window::Close()](#windowclose)
-    
 
 #### Window::SwapBuffers()
 
