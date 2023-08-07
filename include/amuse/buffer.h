@@ -1,6 +1,6 @@
 #pragma once
 
-#include "buffer.h"
+#include "amuse/buffer.h"
 
 #include <cstdint>
 

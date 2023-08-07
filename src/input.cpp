@@ -1,5 +1,5 @@
-#include "input.h"
-#include "es.h"
+#include "amuse/input.h"
+#include "amuse/es.h"
 
 #include <algorithm>
 
@@ -23,5 +23,19 @@ Input::Input() {
     es::AddEventListener("KeyUp", [&](const es::Event& e) {
         keys[(uint16_t)e.keyCode] = false;
         keysUp[(uint16_t)e.keyCode] = true;
+    });
+
+    // es::AddEventListener("MouseButtonDown", [&](const es::Event& e) {
+    //     mouseButtons[(uint16_t)e.mouseButton] = true;
+    //     mouseButtonsDown[(uint16_t)e.mouseButton] = true;
+    // });
+
+    // es::AddEventListener("MouseButtonUp", [&](const es::Event& e) {
+    //     mouseButtons[(uint16_t)e.mouseButton] = false;
+    //     mouseButtonsUp[(uint16_t)e.mouseButton] = true;
+    // });
+
+    es::AddEventListener("MouseMotion", [&](const es::Event& e) {
+        mousePosition = e.mouse.position;
     });
 }

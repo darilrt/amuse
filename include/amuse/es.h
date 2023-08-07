@@ -1,7 +1,7 @@
 #pragma once
 
-#include "enums.h"
-#include "input.h"
+#include "amuse/enums.h"
+#include "amuse/input.h"
 
 #include <glm/glm.hpp>
 #include <SDL.h>
@@ -36,7 +36,7 @@ public:
 
 private:
     static SDL_Event event;
-
+    static bool ignoreGui;
     static Event e;
 
     static std::unordered_map<std::string, std::vector<std::function<void(const Event& e)>>> callbacks;

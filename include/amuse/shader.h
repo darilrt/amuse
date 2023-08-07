@@ -1,11 +1,15 @@
 #pragma once
 
-#include "camera.h"
-#include "transform.h"
-#include "texture.h"
+#include "amuse/camera.h"
+#include "amuse/transform.h"
+#include "amuse/texture.h"
 
 #include <cstdint>
 #include <string>
+
+#define SHADER_UNIFORM_MODEL "model"
+#define SHADER_UNIFORM_VIEW "view"
+#define SHADER_UNIFORM_PROJECTION "projection"
 
 namespace gl {
     
@@ -15,15 +19,18 @@ namespace gl {
         ~Shader();
         
         void Bind();
+
         void Unbind();
 
         void Reload();
 
+        static Shader& LoadAsset(const std::string& assetPath);
+
         // Camera Uniforms (View and Projection)
-        void SetCameraUniforms(Camera& camera);
+        void SetCameraUniforms(const Camera& camera);
 
         // Model Transform Uniform
-        void SetModelTransform(Transform& transform);
+        void SetModelTransform(const Transform& transform);
 
         // Set Sampler2D Uniform
         void SetSampler2D(const char* name, Texture* texture);

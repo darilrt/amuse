@@ -1,4 +1,4 @@
-#include "mesh.h"
+#include "amuse/mesh.h"
 
 gl::Mesh::Mesh() { }
 

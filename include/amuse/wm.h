@@ -5,6 +5,10 @@
 #include <glm/glm.hpp>
 #include <SDL.h>
 
+#ifdef _DEBUG
+#include "debug.h"
+#endif
+
 namespace wm {
 	class Window {
 	public:
@@ -40,6 +44,8 @@ namespace wm {
 
 		inline void SetCursorConfine(bool confine) { SDL_SetWindowGrab(window, confine ? SDL_TRUE : SDL_FALSE); }
 
+		inline void SetResizable(bool resizable) { SDL_SetWindowResizable(window, resizable ? SDL_TRUE : SDL_FALSE); }
+
 		inline void GetCursor(int* x, int* y) { SDL_GetMouseState(x, y); }
 
 		inline int GetWidth() { return width; }
@@ -58,5 +64,9 @@ namespace wm {
 		int height;
 
 		bool running;
+
+#ifdef _DEBUG
+		friend void debug::Init(wm::Window* window);
+#endif
 	};
 }

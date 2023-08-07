@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gl.h"
+#include "amuse/gl.h"
 
 #include <glm/glm.hpp>
 #include <cstdint>

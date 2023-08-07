@@ -1,4 +1,4 @@
-#include "gldefs.h"
+#include "amuse/gldefs.h"
 
 #include <windows.h>
 #include <GL/glew.h>

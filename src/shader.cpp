@@ -11,9 +11,10 @@
 #include <glm/gtx/euler_angles.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "gl.h"
-#include "gldefs.h"
-#include "shader.h"
+#include "amuse/gl.h"
+#include "amuse/gldefs.h"
+#include "amuse/shader.h"
+#include "amuse/shader.h"
 
 void PrintShaderLog_impl(int32_t shader);
 bool CreateShader_impl(const char* vertexPath, const char* fragmentPath, uint32_t* program);
@@ -55,17 +56,24 @@ void gl::Shader::Reload() {
     this->fragmentLastModified = fragmentLastModified;
 }
 
-void gl::Shader::SetCameraUniforms(Camera &camera) {
-    glm::mat4 view = camera.GetView();
-    glm::mat4 projection = camera.GetProjection();
-
-    SetUniformMatrix4fv("view", glm::value_ptr(view));
-    SetUniformMatrix4fv("projection", glm::value_ptr(projection));
+gl::Shader &gl::Shader::LoadAsset(const std::string &assetPath) {
+    std::string vertexPath = assetPath + ".vert";
+    std::string fragmentPath = assetPath + ".frag";
+    
+    return *new gl::Shader(vertexPath.c_str(), fragmentPath.c_str());
 }
 
-void gl::Shader::SetModelTransform(Transform &transform) {
+void gl::Shader::SetCameraUniforms(const Camera &camera) {
+    glm::mat4 view = camera.GetView();
+    glm::mat4 projection = camera.GetProjection();
+    
+    SetUniformMatrix4fv(SHADER_UNIFORM_VIEW, glm::value_ptr(view));
+    SetUniformMatrix4fv(SHADER_UNIFORM_PROJECTION, glm::value_ptr(projection));
+}
+
+void gl::Shader::SetModelTransform(const Transform &transform) {
     glm::mat4 model = transform.GetModel();
-    SetUniformMatrix4fv("model", glm::value_ptr(model));
+    SetUniformMatrix4fv(SHADER_UNIFORM_MODEL, glm::value_ptr(model));
 }
 
 void gl::Shader::SetSampler2D(const char *name, Texture *texture) {
@@ -225,4 +233,6 @@ bool CreateShader_impl(const char* vertexPath, const char* fragmentPath, uint32_
 
     GL_CALL(glDeleteShader(vertex));
     GL_CALL(glDeleteShader(fragment));
+
+    return true;
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "texture.h"
+#include "amuse/texture.h"
 
 #include <cstdint>
 #include <glm/glm.hpp>
@@ -22,7 +22,9 @@ namespace gl {
 
 		void Translate(glm::vec3 translation) { this->position += translation; }
 
-		void SetPerspective(float fov, float aspect, float near, float far);
+		glm::vec2 ScreenToWorld2D(glm::vec2 screenPosition);
+
+		void SetPerspective(float fov,float near, float far);
 
 		void SetOrthographic(float scale, float near, float far);
 
@@ -38,6 +40,10 @@ namespace gl {
 
 		inline void SetFar(float _far) { this->_far = _far; }
 
+		inline void SetScale(float scale) { this->scale = scale; }
+
+		void SetViewport(const glm::vec4& viewport);
+
 		inline void SetRenderTexture(Texture* renderTexture) { this->renderTexture = renderTexture; }
 
 		inline glm::mat4 GetView() const { return view; }
@@ -50,6 +56,9 @@ namespace gl {
 		float _near;
 		float _far;
 		float scale;
+		glm::vec4 viewport;
+
+		bool isOrthographic = false;
 
 		glm::mat4 view;
 		glm::mat4 projection;

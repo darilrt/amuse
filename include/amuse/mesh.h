@@ -1,7 +1,7 @@
 #pragma once
 
-#include "gl.h"
-#include "buffer.h"
+#include "amuse/gl.h"
+#include "amuse/buffer.h"
 
 #include <cstdint>
 #include <vector>

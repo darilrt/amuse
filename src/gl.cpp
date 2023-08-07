@@ -5,8 +5,9 @@
 #include <SDL.h>
 #include <iostream>
 
-#include "gl.h"
-#include "gldefs.h"
+#include "amuse/gl.h"
+#include "amuse/gldefs.h"
+#include "amuse/gl.h"
 
 bool gl::initialized = false;
 
@@ -29,6 +30,8 @@ void gl::Init() {
 		exit(1);
 	}
 
+	GL_CALL(glClearColor(0.05f, 0.05f, 0.05f, 1.0f));
+
 	gl::initialized = true;
 }
 
@@ -44,4 +47,12 @@ void gl::Clear() {
 	GL_CALL(glEnable(GL_BLEND));
 	GL_CALL(glAlphaFunc(GL_GREATER, 0.5));
 	GL_CALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+}
+
+void gl::Draw(Mesh *mesh, Shader *shader, Transform &transform, Camera &camera) {
+	shader->Bind();
+	shader->SetCameraUniforms(camera);
+	shader->SetModelTransform(transform);
+	mesh->DrawTriangles();
+	shader->Unbind();
 }

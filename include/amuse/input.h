@@ -1,10 +1,12 @@
 #pragma once
 
-#include "enums.h"
-#include "timer.h"
+#include "amuse/enums.h"
+#include "amuse/timer.h"
 
 #include <cstdint>
 #include <array>
+
+#include <glm/glm.hpp>
 
 class Input {
 public:
@@ -19,6 +21,8 @@ public:
     inline static bool GetMouseButtonDown(MouseButton button) { return instance.mouseButtonsDown[(uint8_t)button]; }
 
     inline static bool GetMouseButtonUp(MouseButton button) { return instance.mouseButtonsUp[(uint8_t)button]; }
+
+    inline static glm::vec2 GetMousePosition() { return instance.mousePosition; }
     
     inline static float DeltaTime() { return instance.deltaTime; }
 
@@ -27,6 +31,7 @@ public:
 private:
     static Input instance;
     
+    glm::vec2 mousePosition;
     float deltaTime;
     ut::Timer timer;
     ut::Timer deltaTimer;

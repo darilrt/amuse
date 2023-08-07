@@ -1,6 +1,6 @@
-#include "draw.h"
+#include "amuse/draw.h"
 
-#include "gl.h"
+#include "amuse/gl.h"
 
 #include <glm/glm.hpp>
 #include <cstdint>

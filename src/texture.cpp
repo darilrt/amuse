@@ -1,14 +1,15 @@
-#include "texture.h"
-#include "gldefs.h"
+#include "amuse/texture.h"
+#include "amuse/gldefs.h"
+
+#define STB_IMAGE_STATIC
+#define STB_IMAGE_IMPLEMENTATION
+#include "amuse/stb_image.h"
 
 #include <windows.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <cstdint>
-
-#define STB_IMAGE_STATIC
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include <iostream>
 
 gl::Texture::Texture() {
     GL_CALL(glGenTextures(1, &id));
@@ -38,7 +39,11 @@ gl::Texture* gl::Texture::Load(const char* path) {
     int width, height, channels;
     uint8_t* data = stbi_load(path, &width, &height, &channels, 0);
     
-    if (!data) { return nullptr; }
+    if (!data) { 
+        std::cout << "Failed to load texture: " << path << std::endl;
+        delete texture;
+        return nullptr;
+    }
 
     Format format = Format::RGB;
     if (channels == 4) {
@@ -58,5 +63,16 @@ gl::Texture* gl::Texture::Load(const char* path) {
 
     stbi_image_free(data);
 
+    texture->format = format;
+    texture->width = width;
+    texture->height = height;
+
     return texture;
+}
+
+void gl::Texture::SetFilter(Filter filter) {
+    Bind();
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (GLint)filter));
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, (GLint)filter));
+    Unbind();
 }

@@ -1,5 +1,5 @@
-#include "buffer.h"
-#include "gldefs.h"
+#include "amuse/buffer.h"
+#include "amuse/gldefs.h"
 
 #include <windows.h>
 #include <GL/glew.h>
