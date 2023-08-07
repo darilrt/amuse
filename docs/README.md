@@ -88,6 +88,22 @@ Window class for creating and managing a window.
 - [Window::IsOpen()](#windowisopen)
 - [Window::Close()](#windowclose)
     
+#### Example
+
+```c++
+#include <amuse/wm.h>
+
+int main(int argc, char** argv) {
+    wm::Window window("Amuse Engine", 800, 600);
+    
+    while (window.IsOpen())
+    {
+        window.SwapBuffers();
+    }
+    
+    return 0;
+}
+```
 
 #### Constructors
 
