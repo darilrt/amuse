@@ -59,7 +59,94 @@ The graphics module is based on OpenGL 3.3.
 - [wm](#wm)
     - [Window](#wmwindow)
 
+## `namespace` ecs
 
+### `class` Component
+
+Base class for components.
+
+#### Methods
+
+- [Component()](#constructors)
+
+#### Overridable Methods
+
+- [Component::Init()](#componentinit) 
+- [Component::Update()](#componentupdate)
+- [Component::Render()](#componentrender)
+- [Component::Destroy()](#componentdestroy)
+
+#### Example
+
+```c++
+#include <amuse/core.h>
+
+struct SimpleComp : public ecs::Component {
+public:
+    void Init() override  { ... }
+
+    void Update() override  { ... }
+
+    void Render() override  { ... }
+
+    void Destroy() override  { ... }
+};
+```
+
+#### Constructors
+
+```c++
+Component()
+```
+
+Constructs a component.
+
+#### Component::Init()
+
+Called when the component is initialized.
+
+#### Component::Update()
+
+Called every frame to update the component.
+
+#### Component::Render()
+
+Called every frame to render the component after the update.
+
+#### Component::Destroy()
+
+Called when the component is destroyed.
+
+### `class` Entity
+
+Class for entities.
+
+#### Methods
+
+- [Entity()](#constructors)
+
+#### Example
+
+```c++
+#include <amuse/core.h>
+
+struct SimpleComp : public ecs::Component { ... };
+
+int main(int argc, char** argv) {
+    ecs::Entity entity;
+    entity.AddComponent<SimpleComp>();
+
+    ecs::Entity& entity2 = ecs::CreateEntity(
+        SimpleComp()
+    );
+    
+    return 0;
+}
+```
+
+## `namespace` gl
+
+## `namespace` wm
 
 ### wm::Window
 
@@ -67,10 +154,10 @@ Window class for creating and managing a window.
 
 #### Methods
 
-- [Window()](#window)
-- [Window(int width, int height)](#windowint-width-int-height)
-- [Window(const char* title, int width, int height)](#windowconst-char-title-int-width-int-height)
-- [~Window()](#window)
+- [Window()](#constructors)
+- [Window(int width, int height)](#constructors)
+- [Window(const char* title, int width, int height)](#constructors)
+- [~Window()](#destructor)
 - [Window::SwapBuffers()](#windowswapbuffers) 
 - [Window::SetTitle(const char* title)](#windowsettitleconst-char-title)
 - [Window::SetSize(int width, int height)](#windowsetsizeint-width-int-height)
@@ -91,13 +178,12 @@ Window class for creating and managing a window.
 #### Example
 
 ```c++
-#include <amuse/wm.h>
+#include <amuse/core.h>
 
 int main(int argc, char** argv) {
     wm::Window window("Amuse Engine", 800, 600);
     
-    while (window.IsOpen())
-    {
+    while (window.IsOpen()) {
         window.SwapBuffers();
     }
     
