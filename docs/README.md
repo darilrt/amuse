@@ -285,6 +285,14 @@ Class for meshes.
 
 ## `class` es
 
+#### Example
+
+```c++
+es::AddEventListener("event", [](const es::Event& event) {
+    std::cout << "Event triggered!" << std::endl;
+});
+```
+
 #### Methods
 
 - [`void es::AddEventListener(std::string event, std::function<void()> callback)`](#void-esaddeventlistenerstdstring-event-stdfunctionvoid-callback)
