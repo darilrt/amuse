@@ -282,6 +282,11 @@ Class for meshes.
 - [`void Texture::SetFormat(Format format)`](#void-texturesetformatformat-format)
 - [`void Texture::SetFilter(Filter filter)`](#void-texturesetfilterfilter-filter)
 - [`void Texture::SetWrap(Wrap wrap)`](#void-texturesetwrapwrap-wrap)
+- [`Format Texture::GetFormat()`](#format-texturegetformat)
+- [`Wrap Texture::GetWrap()`](#wrap-texturegetwrap)
+- [`uint32_t Texture::GetWidth()`](#int-texturegetwidth)
+- [`uint32_t Texture::GetHeight()`](#int-texturegetheight)
+- [`glm::ivec2 Texture::GetSize()`](#glmivec2-texturegetsize)
 
 #### `Texture::Texture(int width, int height)`
 
@@ -311,6 +316,27 @@ Class for meshes.
 
     [unimplemented yet]
     Sets the texture wrap.
+
+#### `Format Texture::GetFormat()`
+
+    Returns the texture format.
+
+#### `Wrap Texture::GetWrap()`
+
+    [unimplemented yet]
+    Returns the texture wrap.
+
+#### `int Texture::GetWidth()`
+
+    Returns the texture width.
+
+#### `int Texture::GetHeight()`
+
+    Returns the texture height.
+
+#### `glm::ivec2 Texture::GetSize()`
+
+    Returns the texture dimensions.
 
 ### `class` Camera
 
