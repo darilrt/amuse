@@ -273,6 +273,45 @@ Class for meshes.
 
 ### `class` Texture
 
+#### Methods
+
+- [`Texture::Texture(int width, int height)`](#texturetextureint-width-int-height)
+- [`Texture* Texture::Load(std::string path)`](#texture-textureloadstdstring-path)
+- [`void Texture::Bind()`](#void-texturebind)
+- [`void Texture::Unbind()`](#void-textureunbind)
+- [`void Texture::SetFormat(Format format)`](#void-texturesetformatformat-format)
+- [`void Texture::SetFilter(Filter filter)`](#void-texturesetfilterfilter-filter)
+- [`void Texture::SetWrap(Wrap wrap)`](#void-texturesetwrapwrap-wrap)
+
+#### `Texture::Texture(int width, int height)`
+
+    Constructs a texture with the specified width and height.
+
+#### `Texture* Texture::Load(std::string path)`
+        
+    Loads a texture from a file.
+
+#### `void Texture::Bind()`
+    
+    Binds the texture.
+
+#### `void Texture::Unbind()`
+
+    Unbinds the texture.
+
+#### `void Texture::SetFormat(Format format)`
+
+    Sets the texture format.
+
+#### `void Texture::SetFilter(Filter filter)`
+
+    Sets the texture filter.
+
+#### `void Texture::SetWrap(Wrap wrap)`
+
+    [unimplemented yet]
+    Sets the texture wrap.
+
 ### `class` Camera
 
 ### `class` Transform
