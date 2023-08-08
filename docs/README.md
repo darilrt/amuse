@@ -50,9 +50,9 @@ The graphics module is based on OpenGL 3.3.
 ## Class Reference
 
 - [ecs](#ecs)
-    - [Component](#component)
-    - [Entity](#entity)
-    - [System](#system)
+    - [Component](#class-component)
+    - [Entity](#class-entity)
+    - [System](#class-system)
 - [gl](#gl)
     - [Shader](#shader)
     - [Texture](#texture)
@@ -61,20 +61,18 @@ The graphics module is based on OpenGL 3.3.
 
 ## `namespace` ecs
 
-### `class` Component
+### Functions
+
+- [`Entity& ecs::CreateEntity(T... args)`](#entity-ecscreateentityt-args)
+
+#### `Entity& ecs::CreateEntity(T... args)`
+
+    Creates an entity and returns it.
+    The entity isn't added to any system.
+
+### `class` Component {#class-component}
 
 Base class for components.
-
-#### Methods
-
-- [Component()](#constructors)
-
-#### Overridable Methods
-
-- [Component::Init()](#componentinit) 
-- [Component::Update()](#componentupdate)
-- [Component::Render()](#componentrender)
-- [Component::Destroy()](#componentdestroy)
 
 #### Example
 
@@ -93,29 +91,36 @@ public:
 };
 ```
 
-#### Constructors
+#### Methods
 
-```c++
-Component()
-```
+- [`Component::Component()`](#componentcomponent)
 
-Constructs a component.
+#### Overridable Methods
 
-#### Component::Init()
+- [`void Component::Init()`](#void-componentinit) 
+- [`void Component::Update()`](#void-componentupdate)
+- [`void Component::Render()`](#void-componentrender)
+- [`void Component::Destroy()`](#void-componentdestroy)
 
-Called when the component is initialized.
+#### `Component::Component()`
 
-#### Component::Update()
+    Constructs a component.
 
-Called every frame to update the component.
+#### `void Component::Init()`
 
-#### Component::Render()
+    Called when the component is initialized.
 
-Called every frame to render the component after the update.
+#### `void Component::Update()`
 
-#### Component::Destroy()
+    Called every frame to update the component.
 
-Called when the component is destroyed.
+#### `void Component::Render()`
+
+    Called every frame to render the component after the update.
+
+#### `void Component::Destroy()`
+
+    Called when the component is destroyed.
 
 ### `class` Entity
 
@@ -123,7 +128,11 @@ Class for entities.
 
 #### Methods
 
-- [Entity()](#constructors)
+- [`Entity::Entity()`](#entityentity)
+- [`void Entity::AddComponent<T>()`](#t-entityaddcomponentt)
+- [`void Entity::RemoveComponent<T>()`](#void-entityremovecomponentt)
+- [`void Entity::GetComponent<T>()`](#t-entitygetcomponentt)
+- [`void Entity::HasComponent<T>()`](#bool-entityhascomponentt)
 
 #### Example
 
@@ -144,140 +153,89 @@ int main(int argc, char** argv) {
 }
 ```
 
-## `namespace` gl
+#### `Entity::Entity()`
 
-## `namespace` wm
+    Constructs an entity.
 
-### wm::Window
-
-Window class for creating and managing a window.
-
-#### Methods
-
-- [Window()](#constructors)
-- [Window(int width, int height)](#constructors)
-- [Window(const char* title, int width, int height)](#constructors)
-- [~Window()](#destructor)
-- [Window::SwapBuffers()](#windowswapbuffers) 
-- [Window::SetTitle(const char* title)](#windowsettitleconst-char-title)
-- [Window::SetSize(int width, int height)](#windowsetsizeint-width-int-height)
-- [Window::SetFullscreen(bool fullscreen)](#windowsetfullscreenbool-fullscreen)
-- [Window::SetVSync(bool vsync)](#windowsetvsyncbool-vsync)
-- [Window::SetCursorVisible(bool visible)](#windowsetcursorvisiblebool-visible)
-- [Window::SetCursorLocked(bool locked)](#windowsetcursorlockedbool-locked)
-- [Window::SetCursor(int x, int y)](#windowsetcursorint-x-int-y)
-- [Window::SetCursor(glm::ivec2 position)](#windowsetcursorglmivec2-position)
-- [Window::SetRelativeCursorMode(bool relative)](#windowsetrelativecursormodebool-relative)
-- [Window::SetCursorConfine(bool confine)](#windowsetcursorconfinebool-confine)
-- [Window::GetCursor(int* x, int* y)](#windowgetcursorint-x-int-y)
-- [Window::GetWidth()](#windowgetwidth)
-- [Window::GetHeight()](#windowgetheight)
-- [Window::IsOpen()](#windowisopen)
-- [Window::Close()](#windowclose)
+#### `T& Entity::AddComponent<T>()`
     
+    Adds a component to the entity by type.
+
+#### `void Entity::RemoveComponent<T>()`
+    
+    Removes a component from the entity by type.
+
+#### `T& Entity::GetComponent<T>()`
+
+    Gets a component from the entity by type.
+
+#### `bool Entity::HasComponent<T>()`
+    
+    Returns true if the entity has a component by type.
+
+## `class` System
+
+Base class for systems.
+
 #### Example
 
 ```c++
 #include <amuse/core.h>
 
-int main(int argc, char** argv) {
-    wm::Window window("Amuse Engine", 800, 600);
-    
-    while (window.IsOpen()) {
-        window.SwapBuffers();
+struct SimpleComp : public ecs::Component { ... };
+
+struct SimpleSystem : public ecs::System {
+public:
+    void Init() override  {
+        CreateEntity(
+            SimpleComp()
+        );
     }
+
+    void Update() override  { ... }
+
+    void Render() override  { ... }
+
+    void Destroy() override  { ... }
+};
+```
+
+#### Methods
+
+- [`System::System()`](#void-systemsystem)
+- [`Entity& System::CreateEntity()`](#entity-systemcreateentityt-args)
+
+#### Overridable Methods
+
+- [`void System::Init()`](#void-systeminit)
+- [`void System::Update()`](#void-systemupdate)
+- [`void System::Render()`](#void-systemrender)
+- [`void System::Destroy()`](#void-systemdestroy)
+
+#### `void System::System()`
+
+    Constructs a system.
+
+#### `Entity& System::CreateEntity(T... args)`
+
+    Creates an entity and adds it to the system.
+
+#### `void System::Init()`
     
-    return 0;
-}
-```
+    Called when the system is initialized.
 
-#### Constructors
+#### `void System::Update()`
+    
+    Called every frame to update the system.    
 
-```c++
-Window()
-```
-Constructs a window with the default title, width, and height.
+#### `void System::Render()`
+        
+    Called every frame to render the system after the update.
 
-```c++
-Window(int width, int height)
-```
+#### `void System::Destroy()`
+    
+    Called when the system is destroyed.
 
-Constructs a window with the default title and the specified width and height.
+## `namespace` gl
 
-```c++
-Window(const char* title, int width, int height)
-```
-
-Constructs a window with the specified title, width, and height.
-
-#### Destructor
-
-```c++
-~Window()
-```	
-
-Destructs the window.
-
-#### Window::SwapBuffers()
-
-Swaps the front and back buffers.
-
-#### Window::SetTitle(const char* title)
-
-Sets the window title.
-
-#### Window::SetSize(int width, int height)
-
-Sets the window size.
-
-#### Window::SetFullscreen(bool fullscreen)
-
-Sets the window fullscreen mode.
-
-#### Window::SetVSync(bool vsync)
-
-Sets the window vertical sync.
-
-#### Window::SetCursorVisible(bool visible)
-
-Sets the window cursor visibility.
-
-#### Window::SetCursorLocked(bool locked)
-
-Sets the window cursor locked.
-
-#### Window::SetCursor(int x, int y)
-
-Sets the window cursor position.
-
-#### Window::SetCursor(glm::ivec2 position)
-
-Sets the window cursor position.
-
-#### Window::SetRelativeCursorMode(bool relative)
-
-Sets the window relative cursor mode.
-
-#### Window::SetCursorConfine(bool confine)
-
-Sets the window cursor confine.
-
-#### Window::GetCursor(int* x, int* y)
-
-Gets the window cursor position.
-
-#### Window::GetWidth()
-
-Gets the window width.
-
-#### Window::GetHeight()
-
-Gets the window height.
-
-#### Window::IsOpen()
-
-Returns true if the window is open.
-
-#### Window::Close()
-
-Closes the window.
+## `namespace` wm
