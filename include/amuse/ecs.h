@@ -153,6 +153,17 @@ namespace ecs {
             AddEntity(entity);
             return *entity;
         }
+
+        template<typename T>
+        std::vector<T*> GetEntitiesWithComponent() {
+            std::vector<T*> entitiesWithComponent;
+            for (auto& entity : entities) {
+                if (entity->HasComponent<T>()) {
+                    entitiesWithComponent.push_back(&entity->GetComponent<T>());
+                }
+            }
+            return entitiesWithComponent;
+        }
     };   
 
     class SystemManager {
