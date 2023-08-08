@@ -21,6 +21,7 @@ namespace gl {
         ~Mesh() = default;
 
         inline void Bind() { vao.Bind(); }
+        
         inline void Unbind() { vao.Unbind(); }
 
         inline void SetVertices(std::vector<glm::vec3> vertices) { this->vertices = vertices;}

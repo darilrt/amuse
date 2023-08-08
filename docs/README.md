@@ -49,15 +49,30 @@ The graphics module is based on OpenGL 3.3.
 
 ## Class Reference
 
-- [ecs](#ecs)
-    - [Component](#class-component)
-    - [Entity](#class-entity)
-    - [System](#class-system)
-- [gl](#gl)
-    - [Shader](#shader)
-    - [Texture](#texture)
-- [wm](#wm)
-    - [Window](#wmwindow)
+- [namespace ecs](#namespace-ecs)
+    - [Functions](#functions)
+        - [CreateEntity](#entity-ecscreateentityt-args)
+    - [class Component](#class-component)
+    - [class Entity](#class-entity)
+    - [class System](#class-system)
+- [namespace gl](#namespace-gl)
+    - [class Mesh](#class-mesh)
+    - [class Shader](#class-shader)
+    - [class Buffer](#class-buffer)
+    - [class Texture](#class-texture)
+    - [class Camera](#class-camera)
+    - [class Transform](#class-transform)
+    - [class WireBatch](#class-wirebatch)
+- [namespace wm](#namespace-wm)
+    - [class Window](#wmwindow)
+- singletons
+    - [class Input](#class-input)
+    <!-- - [class Time](#class-time) -->
+    - [class es](#class-es) (Event System)
+- components
+    - [Transform](#class-transform)
+    - [Sprite](#class-sprite)
+    - [Camera](#class-camera)
 
 ## `namespace` ecs
 
@@ -80,13 +95,13 @@ Base class for components.
 
 struct SimpleComp : public ecs::Component {
 public:
-    void Init() override  { ... }
+    void Init() override { ... }
 
-    void Update() override  { ... }
+    void Update() override { ... }
 
-    void Render() override  { ... }
+    void Render() override { ... }
 
-    void Destroy() override  { ... }
+    void Destroy() override { ... }
 };
 ```
 
@@ -190,11 +205,11 @@ public:
         );
     }
 
-    void Update() override  { ... }
+    void Update() override { ... }
 
-    void Render() override  { ... }
+    void Render() override { ... }
 
-    void Destroy() override  { ... }
+    void Destroy() override { ... }
 };
 ```
 
@@ -236,4 +251,54 @@ public:
 
 ## `namespace` gl
 
+### `class` Mesh
+
+Class for meshes.
+
+#### Methods
+
+- [`Mesh::Mesh()`](#meshmesh)
+- [`void Mesh::Bind()`](#void-meshbind)
+- [`void Mesh::Unbind()`](#void-meshunbind)
+- [`void Mesh::DrawTriangles()`](#void-meshdrawtriangles)
+- [`void Mesh::SetVertices(std::vector<glm::vec3> vertices)`](#void-meshsetverticesstdvectorglmvec3-vertices)
+- [`void Mesh::SetIndices(std::vector<unsigned int> indices)`](#void-meshsetindicesstdvectorunsigned-int-indices)
+- [`void Mesh::SetNormals(std::vector<glm::vec3> normals)`](#void-meshsetnormalsstdvectorglmvec3-normals)
+- [`void Mesh::SetUVs(std::vector<glm::vec2> uvs)`](#void-meshsetuvsstdvectorglmvec2-uvs)
+- [`void Mesh::Bake()`](#void-meshbake)
+
+### `class` Shader
+
+### `class` Buffer
+
+### `class` Texture
+
+### `class` Camera
+
+### `class` Transform
+
+### `class` WireBatch
+
 ## `namespace` wm
+
+### `class` Window
+
+## `class` es
+
+#### Methods
+
+- [`void es::AddEventListener(std::string event, std::function<void()> callback)`](#void-esaddeventlistenerstdstring-event-stdfunctionvoid-callback)
+- [`void es::TriggerEvent(std::string event)`](#void-estriggereventstdstring-event)
+- [`void es::PollEvents()`](#void-espoll-events)
+
+#### `void es::AddEventListener(std::string event, std::function<void()> callback)`
+
+    Adds an event listener.
+
+#### `void es::TriggerEvent(std::string event)`
+        
+    Triggers an event.
+
+#### `void es::PollEvents()`
+    
+    Polls events.
