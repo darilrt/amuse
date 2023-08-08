@@ -67,8 +67,7 @@ The graphics module is based on OpenGL 3.3.
 
 #### `Entity& ecs::CreateEntity(T... args)`
 
-    Creates an entity and returns it.
-    The entity isn't added to any system.
+    Creates an entity, add all the components passed as arguments and returns it. The entity isn't added to any system.
 
 ### `class` Component {#class-component}
 
@@ -139,14 +138,14 @@ Class for entities.
 ```c++
 #include <amuse/core.h>
 
-struct SimpleComp : public ecs::Component { ... };
-
 int main(int argc, char** argv) {
     ecs::Entity entity;
-    entity.AddComponent<SimpleComp>();
+    entity.AddComponent<Transofrm>();
+
+    // or
 
     ecs::Entity& entity2 = ecs::CreateEntity(
-        SimpleComp()
+        Transofrm()
     );
     
     return 0;
@@ -182,13 +181,12 @@ Base class for systems.
 ```c++
 #include <amuse/core.h>
 
-struct SimpleComp : public ecs::Component { ... };
-
 struct SimpleSystem : public ecs::System {
 public:
     void Init() override  {
         CreateEntity(
-            SimpleComp()
+            Transform(),
+            Sprite()
         );
     }
 
