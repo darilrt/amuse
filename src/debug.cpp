@@ -129,6 +129,24 @@ void debug::DrawStaticLine(const glm::vec3 &start, const glm::vec3 &end, const g
     staticWireBatch->Bake();
 }
 
+void debug::DrawStaticGrid(const glm::vec3 &position, const glm::vec3 &size, const glm::vec3 &color) {
+    if (!staticWireBatch) { staticWireBatch = new gl::WireBatch(); }
+
+    const glm::vec3 halfSize = size * 0.5f;
+    const glm::vec3 min = position - halfSize;
+    const glm::vec3 max = position + halfSize;
+
+    for (float x = min.x; x <= max.x; x += 1.0f) {
+        staticWireBatch->AddLine(glm::vec3(x, min.y, min.z), glm::vec3(x, max.y, min.z), color);
+    }
+
+    for (float y = min.y; y <= max.y; y += 1.0f) {
+        staticWireBatch->AddLine(glm::vec3(min.x, y, min.z), glm::vec3(max.x, y, min.z), color);
+    }
+
+    staticWireBatch->Bake();
+}
+
 void debug::DrawGui() {
 #ifdef AMUSE_USE_IMGUI
 	ImGui::Begin("Debug");

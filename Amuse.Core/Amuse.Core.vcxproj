@@ -138,6 +138,7 @@
     <ClCompile Include="..\src\components\sprite.cpp" />
     <ClCompile Include="..\src\components\sprite_animator.cpp" />
     <ClCompile Include="..\src\components\transform.cpp" />
+    <ClCompile Include="..\src\core.cpp" />
     <ClCompile Include="..\src\debug.cpp" />
     <ClCompile Include="..\src\draw.cpp" />
     <ClCompile Include="..\src\ecs.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="..\src\primitives.cpp" />
     <ClCompile Include="..\src\shader.cpp" />
     <ClCompile Include="..\src\singletons\assets.cpp" />
+    <ClCompile Include="..\src\singletons\scene_manager.cpp" />
     <ClCompile Include="..\src\texture.cpp" />
     <ClCompile Include="..\src\timer.cpp" />
     <ClCompile Include="..\src\transform.cpp" />
@@ -177,6 +179,7 @@
     <ClInclude Include="..\include\amuse\shader.h" />
     <ClInclude Include="..\include\amuse\singletons.h" />
     <ClInclude Include="..\include\amuse\singletons\assets.h" />
+    <ClInclude Include="..\include\amuse\singletons\scene_manager.h" />
     <ClInclude Include="..\include\amuse\singletons\screen.h" />
     <ClInclude Include="..\include\amuse\stb_image.h" />
     <ClInclude Include="..\include\amuse\texture.h" />

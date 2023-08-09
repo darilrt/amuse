@@ -93,6 +93,12 @@
     <ClCompile Include="..\src\singletons\assets.cpp">
       <Filter>Source Files\Singletons</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\singletons\scene_manager.cpp">
+      <Filter>Source Files\Singletons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\amuse\bounds.h">
@@ -177,6 +183,9 @@
       <Filter>Header Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="..\include\amuse\singletons\screen.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\amuse\singletons\scene_manager.h">
       <Filter>Header Files\Singletons</Filter>
     </ClInclude>
   </ItemGroup>

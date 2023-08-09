@@ -15,3 +15,8 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
+
+namespace amuse {
+    void Init(int width, int height);
+    void RunGame();
+}

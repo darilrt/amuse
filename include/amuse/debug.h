@@ -40,4 +40,6 @@ namespace debug {
     void InitFrame();
     
     void DrawStaticLine(const glm::vec3& start, const glm::vec3& end, const glm::vec3& color);
+
+    void DrawStaticGrid(const glm::vec3& position, const glm::vec3& size, const glm::vec3& color);
 }
