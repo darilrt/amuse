@@ -13,4 +13,6 @@ public:
 	void Init() override;
 
 	void Update() override;
+
+	void SetScale(float scale);
 };

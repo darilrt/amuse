@@ -1,21 +1,20 @@
-#include "amuse/input.h"
+#include "amuse/singletons/input.h"
 #include "amuse/es.h"
 
 #include <algorithm>
-#include "input.h"
 
 Input* Input::instance;
 
 Input::Input() {
     keys.fill(false);
-    
+
     es::AddEventListener("Tick", [&](const es::Event& e) {
         deltaTime = deltaTimer.Reset();
-        
+
         keysDown.fill(false);
-		keysUp.fill(false);
+        keysUp.fill(false);
     });
-    
+
     es::AddEventListener("KeyDown", [&](const es::Event& e) {
         keys[(uint16_t)e.keyCode] = true;
         keysDown[(uint16_t)e.keyCode] = true;
@@ -38,12 +37,12 @@ Input::Input() {
 
     es::AddEventListener("MouseMotion", [&](const es::Event& e) {
         mousePosition = e.mouse.position;
-    });
+        });
 }
 
 Input& Input::GetInstance() {
     if (!instance) {
-		instance = new Input();
-	}
+        instance = new Input();
+    }
     return *instance;
 }

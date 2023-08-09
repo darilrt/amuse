@@ -1,7 +1,7 @@
 #pragma once
 
 #include "amuse/enums.h"
-#include "amuse/input.h"
+#include "amuse/singletons/input.h"
 
 #include <glm/glm.hpp>
 #include <SDL.h>

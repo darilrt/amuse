@@ -54,9 +54,6 @@
     <ClCompile Include="..\src\gldefs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -99,6 +96,9 @@
     <ClCompile Include="..\src\singletons\scene_manager.cpp">
       <Filter>Source Files\Singletons</Filter>
     </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Source Files\Singletons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\amuse\bounds.h">
@@ -135,9 +135,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\amuse\gldefs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\amuse\input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\amuse\mesh.h">
@@ -186,6 +183,9 @@
       <Filter>Header Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="..\include\amuse\singletons\scene_manager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\amuse\singletons\input.h">
       <Filter>Header Files\Singletons</Filter>
     </ClInclude>
   </ItemGroup>

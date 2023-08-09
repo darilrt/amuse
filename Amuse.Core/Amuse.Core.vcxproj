@@ -145,7 +145,6 @@
     <ClCompile Include="..\src\es.cpp" />
     <ClCompile Include="..\src\gl.cpp" />
     <ClCompile Include="..\src\gldefs.cpp" />
-    <ClCompile Include="..\src\input.cpp" />
     <ClCompile Include="..\src\mesh.cpp" />
     <ClCompile Include="..\src\primitives.cpp" />
     <ClCompile Include="..\src\shader.cpp" />
@@ -155,6 +154,7 @@
     <ClCompile Include="..\src\timer.cpp" />
     <ClCompile Include="..\src\transform.cpp" />
     <ClCompile Include="..\src\wm.cpp" />
+    <ClCompile Include="input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\amuse\bounds.h" />
@@ -173,12 +173,12 @@
     <ClInclude Include="..\include\amuse\es.h" />
     <ClInclude Include="..\include\amuse\gl.h" />
     <ClInclude Include="..\include\amuse\gldefs.h" />
-    <ClInclude Include="..\include\amuse\input.h" />
     <ClInclude Include="..\include\amuse\mesh.h" />
     <ClInclude Include="..\include\amuse\primitives.h" />
     <ClInclude Include="..\include\amuse\shader.h" />
     <ClInclude Include="..\include\amuse\singletons.h" />
     <ClInclude Include="..\include\amuse\singletons\assets.h" />
+    <ClInclude Include="..\include\amuse\singletons\input.h" />
     <ClInclude Include="..\include\amuse\singletons\scene_manager.h" />
     <ClInclude Include="..\include\amuse\singletons\screen.h" />
     <ClInclude Include="..\include\amuse\stb_image.h" />

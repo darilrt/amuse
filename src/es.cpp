@@ -93,10 +93,18 @@ void es::PollEvents() {
 }
 
 void es::AddEventListener(std::string name, std::function<void(const Event& e)> callback) {
+    if (es::callbacks.find(name) == es::callbacks.end()) {
+        es::callbacks[name] = std::vector<std::function<void(const Event& e)>>();
+    }
+
     es::callbacks[name].push_back(callback);
 }
 
 void es::TriggerEvent(std::string name) {
+    if (es::callbacks.find(name) == es::callbacks.end()) {
+		return;
+	}
+
     for (auto &callback : es::callbacks[name]) {
         callback(e);
     }

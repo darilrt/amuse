@@ -11,11 +11,11 @@ namespace ecs {
     class Component;
     class System;
 
-    using ComponentID = std::uint64_t;
-    using SystemID = std::uint64_t;
+    using ComponentID = std::uint32_t;
+    using SystemID = std::uint32_t;
 
-    constexpr ComponentID MAX_COMPONENTS = 64;
-    constexpr SystemID MAX_SYSTEMS = 64;
+    constexpr ComponentID MAX_COMPONENTS = 32;
+    constexpr SystemID MAX_SYSTEMS = 32;
 
     constexpr ComponentID INVALID_COMPONENT = MAX_COMPONENTS;
     constexpr SystemID INVALID_SYSTEM = MAX_SYSTEMS;

@@ -27,3 +27,7 @@ void Camera::Update() {
     Camera::active->position = transform->position;
     Camera::active->rotation = transform->rotation;
 }
+
+void Camera::SetScale(float scale) {
+	Camera::active->SetOrthographic(scale, -1.0f, 1.0f);
+}
