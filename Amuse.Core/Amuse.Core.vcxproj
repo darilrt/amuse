@@ -151,12 +151,12 @@
     <ClCompile Include="..\src\shader.cpp" />
     <ClCompile Include="..\src\singletons\assets.cpp" />
     <ClCompile Include="..\src\singletons\cursor.cpp" />
+    <ClCompile Include="..\src\singletons\input.cpp" />
     <ClCompile Include="..\src\singletons\scene_manager.cpp" />
     <ClCompile Include="..\src\texture.cpp" />
     <ClCompile Include="..\src\timer.cpp" />
     <ClCompile Include="..\src\transform.cpp" />
     <ClCompile Include="..\src\wm.cpp" />
-    <ClCompile Include="input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\amuse\bounds.h" />

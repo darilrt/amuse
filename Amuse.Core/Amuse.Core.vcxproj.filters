@@ -96,14 +96,14 @@
     <ClCompile Include="..\src\singletons\scene_manager.cpp">
       <Filter>Source Files\Singletons</Filter>
     </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>Source Files\Singletons</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\singletons\cursor.cpp">
       <Filter>Source Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="..\src\components\mesh_renderer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\singletons\input.cpp">
+      <Filter>Source Files\Singletons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
