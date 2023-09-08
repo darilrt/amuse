@@ -15,10 +15,14 @@ void amuse::Init(int width, int height) {
 
 void amuse::RunGame() {
     Screen* screen = Screen::Get();
+
+    SceneManager::Start();
     while (screen->window->IsOpen()) {
         es::PollEvents();
 
+#ifdef _DEBUG
         debug::InitFrame();
+#endif // _DEBUG
         
         SceneManager::Update();
 

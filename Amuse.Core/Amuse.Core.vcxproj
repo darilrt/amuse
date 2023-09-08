@@ -135,6 +135,7 @@
     <ClCompile Include="..\src\buffer.cpp" />
     <ClCompile Include="..\src\camera.cpp" />
     <ClCompile Include="..\src\components\camera.cpp" />
+    <ClCompile Include="..\src\components\mesh_renderer.cpp" />
     <ClCompile Include="..\src\components\sprite.cpp" />
     <ClCompile Include="..\src\components\sprite_animator.cpp" />
     <ClCompile Include="..\src\components\transform.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="..\src\primitives.cpp" />
     <ClCompile Include="..\src\shader.cpp" />
     <ClCompile Include="..\src\singletons\assets.cpp" />
+    <ClCompile Include="..\src\singletons\cursor.cpp" />
     <ClCompile Include="..\src\singletons\scene_manager.cpp" />
     <ClCompile Include="..\src\texture.cpp" />
     <ClCompile Include="..\src\timer.cpp" />
@@ -162,6 +164,7 @@
     <ClInclude Include="..\include\amuse\camera.h" />
     <ClInclude Include="..\include\amuse\components.h" />
     <ClInclude Include="..\include\amuse\components\camera.h" />
+    <ClInclude Include="..\include\amuse\components\mesh_renderer.h" />
     <ClInclude Include="..\include\amuse\components\sprite.h" />
     <ClInclude Include="..\include\amuse\components\sprite_animator.h" />
     <ClInclude Include="..\include\amuse\components\transform.h" />
@@ -178,6 +181,7 @@
     <ClInclude Include="..\include\amuse\shader.h" />
     <ClInclude Include="..\include\amuse\singletons.h" />
     <ClInclude Include="..\include\amuse\singletons\assets.h" />
+    <ClInclude Include="..\include\amuse\singletons\cursor.h" />
     <ClInclude Include="..\include\amuse\singletons\input.h" />
     <ClInclude Include="..\include\amuse\singletons\scene_manager.h" />
     <ClInclude Include="..\include\amuse\singletons\screen.h" />

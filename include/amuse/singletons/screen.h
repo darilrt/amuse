@@ -1,6 +1,6 @@
 #pragma once
 
-#include "amuse/core.h"
+#include "amuse/wm.h"
 
 class Screen {
 public:

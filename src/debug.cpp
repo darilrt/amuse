@@ -66,7 +66,6 @@ void debug::DrawCube(const glm::vec3 &position, const glm::vec3 &size, const glm
     wireBatch->AddLine(glm::vec3(max.x, min.y, min.z), glm::vec3(max.x, min.y, max.z), color);
     wireBatch->AddLine(glm::vec3(min.x, min.y, max.z), glm::vec3(max.x, min.y, max.z), color);
     wireBatch->AddLine(glm::vec3(min.x, min.y, max.z), glm::vec3(min.x, max.y, max.z), color);
-    
 }
 
 void debug::DrawBounds(const math::Bounds &bounds, const glm::vec3 &color) {

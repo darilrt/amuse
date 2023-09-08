@@ -23,6 +23,8 @@ public:
     inline static bool GetMouseButtonUp(MouseButton button) { return GetInstance().mouseButtonsUp[(uint8_t)button]; }
 
     inline static glm::vec2 GetMousePosition() { return GetInstance().mousePosition; }
+
+    inline static glm::vec2 GetMouseDelta() { return GetInstance().mouseDelta; }
     
     inline static float DeltaTime() { return GetInstance().deltaTime; }
 
@@ -32,6 +34,7 @@ private:
     static Input* instance;
     
     glm::vec2 mousePosition;
+    glm::vec2 mouseDelta;
     float deltaTime;
     ut::Timer timer;
     ut::Timer deltaTimer;

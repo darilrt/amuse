@@ -13,6 +13,10 @@ Input::Input() {
 
         keysDown.fill(false);
         keysUp.fill(false);
+        mouseButtons.fill(false);
+        mouseButtonsDown.fill(false);
+        mouseButtonsUp.fill(false);
+        mouseDelta = {0, 0};
     });
 
     es::AddEventListener("KeyDown", [&](const es::Event& e) {
@@ -25,19 +29,20 @@ Input::Input() {
         keysUp[(uint16_t)e.keyCode] = true;
     });
 
-    // es::AddEventListener("MouseButtonDown", [&](const es::Event& e) {
-    //     mouseButtons[(uint16_t)e.mouseButton] = true;
-    //     mouseButtonsDown[(uint16_t)e.mouseButton] = true;
-    // });
+     es::AddEventListener("MouseDown", [&](const es::Event& e) {
+         mouseButtons[(uint16_t)e.mouse.button] = true;
+         mouseButtonsDown[(uint16_t)e.mouse.button] = true;
+     });
 
-    // es::AddEventListener("MouseButtonUp", [&](const es::Event& e) {
-    //     mouseButtons[(uint16_t)e.mouseButton] = false;
-    //     mouseButtonsUp[(uint16_t)e.mouseButton] = true;
-    // });
+     es::AddEventListener("MouseUp", [&](const es::Event& e) {
+         mouseButtons[(uint16_t)e.mouse.button] = false;
+         mouseButtonsUp[(uint16_t)e.mouse.button] = true;
+     });
 
     es::AddEventListener("MouseMotion", [&](const es::Event& e) {
         mousePosition = e.mouse.position;
-        });
+        mouseDelta = e.mouse.delta;
+    });
 }
 
 Input& Input::GetInstance() {

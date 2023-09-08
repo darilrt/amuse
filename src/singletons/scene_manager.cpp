@@ -2,6 +2,10 @@
 
 ecs::SystemManager* SceneManager::systemManager = nullptr;
 
+void SceneManager::Start() {
+    GetSystemManager()->Start();
+}
+
 void SceneManager::Update() {
     GetSystemManager()->Update();
 }

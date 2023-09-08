@@ -6,6 +6,8 @@
 #include <memory>
 #include <vector>
 
+#define REQUIRE_COMPONENT(type) if (!entity->HasComponent<type>()) { debug::Log("Required component " #type " not found\n"); abort(); }
+
 namespace ecs {
 	class Entity;
     class Component;
@@ -48,9 +50,14 @@ namespace ecs {
         Entity* entity = nullptr;
 
         virtual void Init() {}
+        virtual void Start() {}
         virtual void Update() {}
         virtual void Render() {}
         virtual void Destroy() {}
+
+        inline Entity& GetEntity() const {
+			return *entity;
+		}
     };
 
     class Entity {
@@ -89,6 +96,12 @@ namespace ecs {
             delete ptr;
         }
 
+        void Start() {
+            for (auto& c : components) {
+				if (c) { c->Start(); }
+			}
+        }
+
         void Update() {
             for (auto& c : components) {
                 if (c) { c->Update(); }
@@ -114,6 +127,7 @@ namespace ecs {
 
     public:
         virtual void Init() {}
+        virtual void Start() {}
         virtual void Update() {}
         virtual void Render() {}
         virtual void Destroy() {}
@@ -121,6 +135,12 @@ namespace ecs {
         void AddEntity(Entity* entity) {
             entities.push_back(entity);
         }
+
+        void StartEntities() {
+			for (auto& entity : entities) {
+				entity->Start();
+			}
+		}
 
         void UpdateEntities() {
             for (auto& entity : entities) {
@@ -196,6 +216,11 @@ namespace ecs {
 
         SystemID GetActiveSystemID() {
             return activeSystem;
+        }
+
+        void Start() {
+            systems[activeSystem]->Start();
+			systems[activeSystem]->StartEntities();
         }
 
         void Update() {

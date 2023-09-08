@@ -6,14 +6,17 @@
 #include <glm/gtx/quaternion.hpp>
 
 void Transform::Update() {
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, position);
-    model = glm::scale(model, scale);
-    model = glm::mat4_cast(rotation) * model;
+    matrix = glm::mat4(1.0f);
+    matrix = glm::translate(matrix, position);
+    matrix = glm::scale(matrix, scale);
+    matrix = glm::mat4_cast(rotation) * matrix;
 
     if (parent != nullptr) {
-        model = parent->matrix * model;
+        matrix = parent->matrix * matrix;
     }
+}
 
-    this->matrix = model;
+glm::mat4 Transform::GetModelMatrix() {
+    Update();
+    return matrix;
 }

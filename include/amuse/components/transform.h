@@ -17,4 +17,6 @@ public:
     glm::mat4 matrix;
 
     void Update() override;
+
+    glm::mat4 GetModelMatrix();
 };
