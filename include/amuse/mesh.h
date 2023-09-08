@@ -10,6 +10,26 @@
 namespace gl {
 
     class Mesh {
+        class VertexBufferReference {
+        public:
+            VertexBufferReference(VertexBuffer* buffer, uint32_t count, gl::Type type) {
+                this->buffer = buffer;
+                this->count = count;
+                this->type = type;
+            }
+
+            ~VertexBufferReference() = default;
+
+            inline VertexBuffer* GetBuffer() const { return buffer; }
+            inline uint32_t GetCount() const { return count; }
+            inline gl::Type GetType() const { return type; }
+
+        private:
+            VertexBuffer* buffer;
+            uint32_t count;
+            gl::Type type;
+        };
+
     public:
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec3> normals;
@@ -34,6 +54,8 @@ namespace gl {
 
         inline void DrawTriangles() { vao.DrawTriangles(ibo); }
 
+        inline void AddVertexBuffer(VertexBuffer* buffer, , gl::Type type, uint32_t count) { buffers.push_back(VertexBufferReference(buffer, count, type)); }
+
         void Bake();
 
     private:
@@ -42,6 +64,8 @@ namespace gl {
         VertexBuffer nbo;
         VertexBuffer tbo;
         IndexBuffer ibo;
+
+        std::vector<VertexBufferReference> buffers;
     };
 
 }

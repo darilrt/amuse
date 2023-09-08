@@ -6,6 +6,12 @@
 
 namespace gl {
     
+	enum class Type {
+		Float = 0x1406,
+		Int = 0x1404,
+		UInt = 0x1405,
+	};
+
 	class IndexBuffer {
 	public:
 		uint32_t count;
@@ -54,8 +60,9 @@ namespace gl {
 		template<>
 		void AddBuffer<float>(VertexBuffer& vbo, uint32_t count) { AddBufferFloat(vbo, count); }
 
-	private:
 		void AddBufferFloat(VertexBuffer& vbo, uint32_t count);
+
+	private:
 
 		uint32_t id = 0;
 		uint32_t count = 0;

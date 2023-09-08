@@ -25,6 +25,25 @@ void gl::Mesh::Bake() {
 
     ibo.SetData(indices.data(), indices.size() * 3);
 
+    for (auto& bufferReference : buffers) {
+        switch (bufferReference.GetType()) {
+            case gl::Type::Float:
+                vao.AddBuffer<float>(*bufferReference.GetBuffer(), bufferReference.GetCount());
+                break;
+
+            case gl::Type::Int:
+                vao.AddBuffer<int>(*bufferReference.GetBuffer(), bufferReference.GetCount());
+                break;
+
+            case gl::Type::UInt:
+                vao.AddBuffer<uint32_t>(*bufferReference.GetBuffer(), bufferReference.GetCount());
+                break;
+        
+            default:
+                break;
+        }
+    }
+
     vao.Unbind();
     ibo.Unbind();
 
