@@ -26,7 +26,7 @@ namespace ecs {
     extern SystemID lastSystemID;
 
     template<typename T>
-    constexpr ComponentID GetComponentTypeID() noexcept {
+    ComponentID GetComponentTypeID() noexcept {
         static_assert(std::is_base_of<Component, T>::value, "T must inherit from Component");
         static ComponentID typeID = INVALID_COMPONENT;
         if (typeID == INVALID_COMPONENT) {
@@ -36,7 +36,7 @@ namespace ecs {
     }
 
     template<typename T>
-    constexpr SystemID GetSystemTypeID() noexcept {
+    SystemID GetSystemTypeID() noexcept {
         static_assert(std::is_base_of<System, T>::value, "T must inherit from System");
         static SystemID typeID = INVALID_SYSTEM;
         if (typeID == INVALID_SYSTEM) {
