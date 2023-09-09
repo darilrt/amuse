@@ -1,8 +1,11 @@
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 #include "amuse/camera.h"
 #include "amuse/gldefs.h"
 #include "amuse/camera.h"
 
-#include <windows.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
 
