@@ -3,7 +3,7 @@
 void SpriteAnimator::Init() {
     sprite = &entity->GetComponent<Sprite>();
 
-    assert(sprite != nullptr, "Only entities with a Sprite component can have a SpriteAnimator component");
+    //assert(sprite != nullptr, "Only entities with a Sprite component can have a SpriteAnimator component");
 }
 
 void SpriteAnimator::Update() {

@@ -11,7 +11,7 @@ void Sprite::Init() {
 
     transform = &entity->GetComponent<Transform>();
 
-    assert(transform != nullptr, "Only entities with a Transform component can have a Sprite component");
+    //assert(transform != nullptr, "Only entities with a Transform component can have a Sprite component");
     
     es::AddEventListener("Tick", [this](const es::Event& event) {
         this->shader->Reload();
