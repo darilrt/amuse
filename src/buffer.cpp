@@ -87,3 +87,6 @@ void gl::IndexBuffer::SetData(void *data, uint32_t count) {
 	this->Bind();
 	GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), data, GL_STATIC_DRAW));
 }
+
+template<>
+void gl::VertexArray::AddBuffer<float>(VertexBuffer& vbo, uint32_t count) { AddBufferFloat(vbo, count); }

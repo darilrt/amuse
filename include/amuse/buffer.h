@@ -66,8 +66,8 @@ namespace gl {
 	};
 
 	template<>
-	void VertexArray::AddBuffer<float>(VertexBuffer& vbo, uint32_t count) { AddBufferFloat(vbo, count); }
-	
+	void gl::VertexArray::AddBuffer<float>(VertexBuffer& vbo, uint32_t count);
+
 	class FrameBuffer {
 	public:
 		// FrameBuffer();
