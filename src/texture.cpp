@@ -5,7 +5,10 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "amuse/stb_image.h"
 
+#ifdef _WIN32
 #include <windows.h>
+#endif
+
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <cstdint>
