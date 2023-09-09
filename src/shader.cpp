@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <sys/stat.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
