@@ -54,7 +54,7 @@ namespace gl {
 
         inline void DrawTriangles() { vao.DrawTriangles(ibo); }
 
-        inline void AddVertexBuffer(VertexBuffer* buffer, , gl::Type type, uint32_t count) { buffers.push_back(VertexBufferReference(buffer, count, type)); }
+        inline void AddVertexBuffer(VertexBuffer* buffer, gl::Type type, uint32_t count) { buffers.push_back(VertexBufferReference(buffer, count, type)); }
 
         void Bake();
 
