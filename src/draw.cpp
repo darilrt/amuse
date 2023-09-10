@@ -8,9 +8,9 @@
 gl::WireBatch::WireBatch() {
     vao.Bind();
     vbo.Bind();
-    vao.AddBuffer<float>(vbo, 3);
+    vao.AddBuffer(vbo, gl::Type::Float, 3);
     cbo.Bind();
-    vao.AddBuffer<float>(cbo, 3);
+    vao.AddBuffer(cbo, gl::Type::Float, 3);
     vao.Unbind();
 }
 
@@ -31,8 +31,8 @@ void gl::WireBatch::Draw(gl::Camera& camera) {
 }
 
 void gl::WireBatch::Bake() {
-    vbo.SetData(vertices.data(), vertices.size() * sizeof(glm::vec3));
-    cbo.SetData(colors.data(), colors.size() * sizeof(glm::vec3));
+    vbo.SetData(vertices.data(), vertices.size() * sizeof(glm::vec3), gl::VertexBuffer::Static);
+    cbo.SetData(colors.data(), colors.size() * sizeof(glm::vec3), gl::VertexBuffer::Static);
 }
 
 void gl::WireBatch::Clear() {

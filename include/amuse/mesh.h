@@ -52,13 +52,14 @@ namespace gl {
 
         inline void SetIndices(std::vector<glm::u32vec3> indices) { this->indices = indices; }
 
-        inline void DrawTriangles() { vao.DrawTriangles(ibo); }
+        inline void DrawTriangles() { if (!baked) { return; } vao.DrawTriangles(ibo); }
 
         inline void AddVertexBuffer(VertexBuffer* buffer, gl::Type type, uint32_t count) { buffers.push_back(VertexBufferReference(buffer, count, type)); }
 
         void Bake();
 
     private:
+        bool baked = false;
         VertexArray vao;
         VertexBuffer vbo;
         VertexBuffer nbo;

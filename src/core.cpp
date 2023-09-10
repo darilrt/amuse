@@ -5,6 +5,8 @@ void amuse::Init(int width, int height) {
 	
     Screen* screen = Screen::Get();
 	screen->window = new wm::Window("Game", width, height);
+
+    screen->window->SetVSync(true);
 	
 	debug::Init(screen->window);
 

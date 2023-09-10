@@ -38,11 +38,12 @@ void gl::VertexArray::DrawLines(int32_t linesCount) {
 	GL_CALL(glDrawArrays(GL_LINES, 0, linesCount));
 }
 
-void gl::VertexArray::AddBufferFloat(VertexBuffer& vbo, uint32_t count) {
+void gl::VertexArray::AddBuffer(VertexBuffer& vbo, gl::Type type, uint32_t count) {
 	this->Bind();
 	vbo.Bind();
+	
+	GL_CALL(glVertexAttribPointer(this->count, count, (GLenum) type, GL_FALSE, 0, nullptr));
 
-	GL_CALL(glVertexAttribPointer(this->count, count, GL_FLOAT, GL_FALSE, 0, nullptr));
 	GL_CALL(glEnableVertexAttribArray(this->count));
 
 	this->count++;
@@ -64,9 +65,9 @@ void gl::VertexBuffer::Unbind() {
 	GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, 0));
 }
 
-void gl::VertexBuffer::SetData(void* data, uint32_t size) {
+void gl::VertexBuffer::SetData(void* data, uint32_t size, gl::VertexBuffer::Usage usage) {
 	this->Bind();
-	GL_CALL(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
+	GL_CALL(glBufferData(GL_ARRAY_BUFFER, size, data, (GLenum) usage));
 }
 
 gl::IndexBuffer::IndexBuffer() {
@@ -90,6 +91,3 @@ void gl::IndexBuffer::SetData(void *data, uint32_t count) {
 	this->Bind();
 	GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), data, GL_STATIC_DRAW));
 }
-
-template<>
-void gl::VertexArray::AddBuffer<float>(VertexBuffer& vbo, uint32_t count) { AddBufferFloat(vbo, count); }

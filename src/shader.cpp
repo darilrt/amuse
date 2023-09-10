@@ -128,8 +128,8 @@ void gl::Shader::SetUniform1fv(const char *name, float *value, int count) {
     GL_CALL(glUniform1fv(glGetUniformLocation(program, name), count, value));
 }
 
-void gl::Shader::SetUniformMatrix4fv(const char *name, float *value) {
-    GL_CALL(glUniformMatrix4fv(glGetUniformLocation(program, name), 1, GL_FALSE, value));
+void gl::Shader::SetUniformMatrix4fv(const char *name, float *value, int count) {
+    GL_CALL(glUniformMatrix4fv(glGetUniformLocation(program, name), count, GL_FALSE, value));
 }
 
 time_t GetLastModifiedTime(const char* path) {

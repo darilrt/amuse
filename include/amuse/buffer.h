@@ -30,13 +30,19 @@ namespace gl {
 
 	class VertexBuffer {
 	public:
+		enum Usage : uint32_t {
+			Stream = 0x88E0,
+			Static = 0x88E4,
+			Dynamic = 0x88E8,
+		};
+
 		VertexBuffer();
 		~VertexBuffer();
 
 		void Bind();
 		void Unbind();
 
-		void SetData(void* data, uint32_t size);
+		void SetData(void* data, uint32_t size, gl::VertexBuffer::Usage usage);
 
 	private:
 		uint32_t id;
@@ -54,19 +60,13 @@ namespace gl {
 
 		void DrawLines(int32_t linesCount);
 
-		template<typename T>
-		void AddBuffer(VertexBuffer& vbo, uint32_t count) { }
-
-		void AddBufferFloat(VertexBuffer& vbo, uint32_t count);
+		void AddBuffer(VertexBuffer& vbo, gl::Type type, uint32_t count);
 
 	private:
 
 		uint32_t id = 0;
 		uint32_t count = 0;
 	};
-
-	template<>
-	void gl::VertexArray::AddBuffer<float>(VertexBuffer& vbo, uint32_t count);
 
 	class FrameBuffer {
 	public:

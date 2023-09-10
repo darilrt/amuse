@@ -66,7 +66,7 @@ namespace gl {
         void SetUniform1fv(const char* name, float* value, int count);
 
         // Set Matrix4 Uniform
-        void SetUniformMatrix4fv(const char* name, float* value);
+        void SetUniformMatrix4fv(const char* name, float* value, int count=1);
 
         // Check if the shader is valid
         bool IsValid() { return valid; }

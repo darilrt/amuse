@@ -12,36 +12,23 @@ gl::Mesh::Mesh(std::vector<glm::vec3> vertices, std::vector<glm::vec3> normals, 
 }
 
 void gl::Mesh::Bake() {
+    baked = true;
+
     vao.Bind();
 
-    vbo.SetData(vertices.data(), vertices.size() * sizeof(glm::vec3));
-    vao.AddBuffer<float>(vbo, 3);
+    vbo.SetData(vertices.data(), vertices.size() * sizeof(glm::vec3), gl::VertexBuffer::Static);
+    vao.AddBuffer(vbo, gl::Type::Float, 3);
 
-    nbo.SetData(normals.data(), normals.size() * sizeof(glm::vec3));
-    vao.AddBuffer<float>(nbo, 3);
+    nbo.SetData(normals.data(), normals.size() * sizeof(glm::vec3), gl::VertexBuffer::Static);
+    vao.AddBuffer(nbo, gl::Type::Float, 3);
 
-    tbo.SetData(uvs.data(), uvs.size() * sizeof(glm::vec2));
-    vao.AddBuffer<float>(tbo, 2);
+    tbo.SetData(uvs.data(), uvs.size() * sizeof(glm::vec2), gl::VertexBuffer::Static);
+    vao.AddBuffer(tbo, gl::Type::Float, 2);
 
     ibo.SetData(indices.data(), indices.size() * 3);
 
     for (auto& bufferReference : buffers) {
-        switch (bufferReference.GetType()) {
-            case gl::Type::Float:
-                vao.AddBuffer<float>(*bufferReference.GetBuffer(), bufferReference.GetCount());
-                break;
-
-            case gl::Type::Int:
-                vao.AddBuffer<int>(*bufferReference.GetBuffer(), bufferReference.GetCount());
-                break;
-
-            case gl::Type::UInt:
-                vao.AddBuffer<uint32_t>(*bufferReference.GetBuffer(), bufferReference.GetCount());
-                break;
-        
-            default:
-                break;
-        }
+        vao.AddBuffer(*bufferReference.GetBuffer(), bufferReference.GetType(), bufferReference.GetCount());
     }
 
     vao.Unbind();
