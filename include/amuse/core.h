@@ -8,6 +8,7 @@
 #include "amuse/bounds.h"
 #include "amuse/components.h"
 #include "amuse/singletons.h"
+#include "amuse/file.h"
 
 #ifdef _DEBUG
 #include "amuse/debug.h"

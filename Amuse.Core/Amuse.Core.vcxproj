@@ -144,6 +144,7 @@
     <ClCompile Include="..\src\draw.cpp" />
     <ClCompile Include="..\src\ecs.cpp" />
     <ClCompile Include="..\src\es.cpp" />
+    <ClCompile Include="..\src\file.cpp" />
     <ClCompile Include="..\src\gl.cpp" />
     <ClCompile Include="..\src\gldefs.cpp" />
     <ClCompile Include="..\src\mesh.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="..\include\amuse\timer.h" />
     <ClInclude Include="..\include\amuse\transform.h" />
     <ClInclude Include="..\include\amuse\wm.h" />
+    <ClInclude Include="file.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -105,6 +105,9 @@
     <ClCompile Include="..\src\singletons\input.cpp">
       <Filter>Source Files\Singletons</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\amuse\bounds.h">
@@ -198,6 +201,9 @@
       <Filter>Header Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="..\include\amuse\components\mesh_renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
