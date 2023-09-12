@@ -12,14 +12,14 @@ namespace gl {
         enum class Format : uint32_t {
             RGB     = 0x1907,
             RGBA    = 0x1908,
-            DEPTH16 = 0x81A5,
-            DEPTH24 = 0x81A6,
-            DEPTH32 = 0x81A7,
+            Depth16 = 0x81A5,
+            Depth24 = 0x81A6,
+            Depth32 = 0x81A7,
         };
 
         enum class Filter : int32_t {
-            NEAREST = 0x2600,
-            LINEAR  = 0x2601,
+            Nearest = 0x2600,
+            Linear  = 0x2601,
         };
         
         Texture();
