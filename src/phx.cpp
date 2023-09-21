@@ -1,6 +1,5 @@
 #include "amuse/phx.h"
 #include "amuse/collider.h"
-#include "phx.h"
 
 #include <glm/glm.hpp>
 

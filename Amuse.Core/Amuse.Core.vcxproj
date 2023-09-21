@@ -134,6 +134,7 @@
     <ClCompile Include="..\src\bounds.cpp" />
     <ClCompile Include="..\src\buffer.cpp" />
     <ClCompile Include="..\src\camera.cpp" />
+    <ClCompile Include="..\src\collider.cpp" />
     <ClCompile Include="..\src\components\camera.cpp" />
     <ClCompile Include="..\src\components\mesh_renderer.cpp" />
     <ClCompile Include="..\src\components\sprite.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="..\src\gl.cpp" />
     <ClCompile Include="..\src\gldefs.cpp" />
     <ClCompile Include="..\src\mesh.cpp" />
+    <ClCompile Include="..\src\phx.cpp" />
     <ClCompile Include="..\src\primitives.cpp" />
     <ClCompile Include="..\src\shader.cpp" />
     <ClCompile Include="..\src\singletons\assets.cpp" />
@@ -163,6 +165,7 @@
     <ClInclude Include="..\include\amuse\bounds.h" />
     <ClInclude Include="..\include\amuse\buffer.h" />
     <ClInclude Include="..\include\amuse\camera.h" />
+    <ClInclude Include="..\include\amuse\collider.h" />
     <ClInclude Include="..\include\amuse\components.h" />
     <ClInclude Include="..\include\amuse\components\camera.h" />
     <ClInclude Include="..\include\amuse\components\mesh_renderer.h" />
@@ -177,7 +180,9 @@
     <ClInclude Include="..\include\amuse\es.h" />
     <ClInclude Include="..\include\amuse\gl.h" />
     <ClInclude Include="..\include\amuse\gldefs.h" />
+    <ClInclude Include="..\include\amuse\mainfold.h" />
     <ClInclude Include="..\include\amuse\mesh.h" />
+    <ClInclude Include="..\include\amuse\phx.h" />
     <ClInclude Include="..\include\amuse\primitives.h" />
     <ClInclude Include="..\include\amuse\shader.h" />
     <ClInclude Include="..\include\amuse\singletons.h" />
