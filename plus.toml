@@ -1,0 +1,29 @@
+name = "amuse_v2"
+version = "0.1.0"
+description = ""
+author = ""
+email = ""
+url = ""
+license = ""
+requires = [ "tomlplusplus", "sdl2",]
+subprojects = []
+
+[compiler]
+cxx = "g++"
+c = "gcc"
+standard = "c++20"
+flags = []
+includes = [ "include",]
+defines = []
+warnings = []
+debug = true
+
+[linker]
+type = "console-app"
+flags = []
+libdirs = []
+libs = []
+
+[deps.tomlplusplus]
+git = "https://github.com/ToruNiina/toml11.git"
+includes = [ "./",]
