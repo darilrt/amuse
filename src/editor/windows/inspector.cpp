@@ -17,5 +17,6 @@ void InspectorEditor::on_gui()
     if (ImGui::InputText("Name", buffer, 256, ImGuiInputTextFlags_EnterReturnsTrue))
     {
         editor->selected_actor->name = buffer;
+        editor->set_edited();
     }
 }

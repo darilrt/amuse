@@ -2,6 +2,7 @@
 #include "engine/event_system.hpp"
 #include "engine/input.hpp"
 #include "engine/graphics/gfx.hpp"
+#include "editor/style.hpp"
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
@@ -13,105 +14,32 @@
 #include "editor/windows/scene.hpp"
 #include "editor/windows/inspector.hpp"
 
-#include "icons_fork_awesome.hpp"
-
-void style_imgui()
-{
-    auto &io = ImGui::GetIO();
-    io.Fonts->AddFontFromFileTTF("assets/fonts/JetBrainsMono-Medium.ttf", 20.0f);
-
-    float base_font_size = 13.0f;                        // 13.0f is the size of the default font. Change to the font size you use.
-    float icon_font_size = base_font_size * 2.0f / 3.0f; // FontAwesome fonts need to have their sizes reduced by 2.0f/3.0f in order to align correctly
-
-    // merge in icons from Font Awesome
-    static const ImWchar icons_ranges[] = {ICON_MIN_FK, ICON_MAX_16_FK, 0};
-    ImFontConfig icons_config;
-    icons_config.MergeMode = true;
-    icons_config.PixelSnapH = true;
-    icons_config.GlyphMinAdvanceX = icon_font_size;
-    io.Fonts->AddFontFromFileTTF("assets/fonts/forkawesome-webfont.ttf", icon_font_size, &icons_config, icons_ranges);
-
-    ImGuiStyle *style = &ImGui::GetStyle();
-    style->WindowRounding = 4.0f;
-    style->FramePadding = ImVec2(5.0f, 5.0f);
-    style->FrameRounding = 4.0f;
-    style->WindowPadding = ImVec2(4.0f, 4.0f);
-    style->WindowBorderSize = 0.0f;
-    style->IndentSpacing = 20.0f;
-    style->Alpha = 1.0f;
-    style->TabRounding = 5.0f;
-    style->TabBorderSize = 0.0f;
-
-    const ImVec4 &white = ImVec4(1.0f, 1.00f, 1.00f, 1.00f);
-
-    const ImVec4 &color1 = ImVec4(0.08f, 0.08f, 0.08f, 1.00f);
-    const ImVec4 &color2 = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-    const ImVec4 &color3 = ImVec4(0.19f, 0.19f, 0.19f, 1.00f);
-    const ImVec4 &color4 = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
-
-    ImVec4 *colors = ImGui::GetStyle().Colors;
-
-    colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-    colors[ImGuiCol_TextDisabled] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
-    colors[ImGuiCol_WindowBg] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-    colors[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-    colors[ImGuiCol_PopupBg] = ImVec4(0.19f, 0.19f, 0.19f, 0.92f);
-    colors[ImGuiCol_Border] = ImVec4(0.08f, 0.08f, 0.08f, 0.29f);
-    colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.24f);
-    colors[ImGuiCol_FrameBg] = ImVec4(0.05f, 0.05f, 0.05f, 0.54f);
-    colors[ImGuiCol_FrameBgHovered] = ImVec4(0.19f, 0.19f, 0.19f, 0.54f);
-    colors[ImGuiCol_FrameBgActive] = ImVec4(0.20f, 0.22f, 0.23f, 1.00f);
-    colors[ImGuiCol_TitleBg] = ImVec4(0.082f, 0.082f, 0.082f, 1.00f);
-    colors[ImGuiCol_TitleBgActive] = ImVec4(0.082f, 0.082f, 0.082f, 1.00f);
-    colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
-    colors[ImGuiCol_MenuBarBg] = ImVec4(0.082f, 0.082f, 0.082f, 1.00f);
-    colors[ImGuiCol_ScrollbarBg] = ImVec4(0.05f, 0.05f, 0.05f, 0.54f);
-    colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.34f, 0.34f, 0.34f, 0.54f);
-    colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.40f, 0.40f, 0.40f, 0.54f);
-    colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.56f, 0.56f, 0.56f, 0.54f);
-    colors[ImGuiCol_CheckMark] = ImVec4(0.33f, 0.67f, 0.86f, 1.00f);
-    colors[ImGuiCol_SliderGrab] = ImVec4(0.34f, 0.34f, 0.34f, 0.54f);
-    colors[ImGuiCol_SliderGrabActive] = ImVec4(0.56f, 0.56f, 0.56f, 0.54f);
-    colors[ImGuiCol_Button] = ImVec4(0.05f, 0.05f, 0.05f, 0.54f);
-    colors[ImGuiCol_ButtonHovered] = ImVec4(0.19f, 0.19f, 0.19f, 0.54f);
-    colors[ImGuiCol_ButtonActive] = ImVec4(0.20f, 0.22f, 0.23f, 1.00f);
-    colors[ImGuiCol_Header] = ImVec4(0.00f, 0.00f, 0.00f, 0.52f);
-    colors[ImGuiCol_HeaderHovered] = ImVec4(0.00f, 0.00f, 0.00f, 0.36f);
-    colors[ImGuiCol_HeaderActive] = ImVec4(0.20f, 0.22f, 0.23f, 0.33f);
-    colors[ImGuiCol_Separator] = ImVec4(0.28f, 0.28f, 0.28f, 0.29f);
-    colors[ImGuiCol_SeparatorHovered] = ImVec4(0.44f, 0.44f, 0.44f, 0.29f);
-    colors[ImGuiCol_SeparatorActive] = ImVec4(0.40f, 0.44f, 0.47f, 1.00f);
-    colors[ImGuiCol_ResizeGrip] = ImVec4(0.28f, 0.28f, 0.28f, 0.29f);
-    colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.44f, 0.44f, 0.44f, 0.29f);
-    colors[ImGuiCol_ResizeGripActive] = ImVec4(0.40f, 0.44f, 0.47f, 1.00f);
-    colors[ImGuiCol_Tab] = ImVec4(0.00f, 0.00f, 0.00f, 0.52f);
-    colors[ImGuiCol_TabHovered] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
-    colors[ImGuiCol_TabActive] = ImVec4(0.20f, 0.20f, 0.20f, 0.36f);
-    colors[ImGuiCol_TabUnfocused] = ImVec4(0.08f, 0.08f, 0.08f, 0.52f);
-    colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-    colors[ImGuiCol_DockingPreview] = ImVec4(0.33f, 0.67f, 0.86f, 1.00f);
-    colors[ImGuiCol_DockingEmptyBg] = ImVec4(0.08f, 0.08f, 0.08f, 1.00f);
-    colors[ImGuiCol_PlotLines] = ImVec4(1.00f, 0.00f, 0.00f, 1.00f);
-    colors[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.00f, 0.00f, 1.00f);
-    colors[ImGuiCol_PlotHistogram] = ImVec4(1.00f, 0.00f, 0.00f, 1.00f);
-    colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.00f, 0.00f, 1.00f);
-    colors[ImGuiCol_TableHeaderBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.52f);
-    colors[ImGuiCol_TableBorderStrong] = ImVec4(0.00f, 0.00f, 0.00f, 0.52f);
-    colors[ImGuiCol_TableBorderLight] = ImVec4(0.28f, 0.28f, 0.28f, 0.29f);
-    colors[ImGuiCol_TableRowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-    colors[ImGuiCol_TableRowBgAlt] = ImVec4(1.00f, 1.00f, 1.00f, 0.06f);
-    colors[ImGuiCol_TextSelectedBg] = ImVec4(0.20f, 0.22f, 0.23f, 1.00f);
-    colors[ImGuiCol_DragDropTarget] = ImVec4(0.33f, 0.67f, 0.86f, 1.00f);
-    colors[ImGuiCol_NavHighlight] = ImVec4(1.00f, 0.00f, 0.00f, 1.00f);
-    colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 0.00f, 0.00f, 0.70f);
-    colors[ImGuiCol_NavWindowingDimBg] = ImVec4(1.00f, 0.00f, 0.00f, 0.20f);
-    colors[ImGuiCol_ModalWindowDimBg] = ImVec4(1.00f, 0.00f, 0.00f, 0.35f);
-}
+#include "icons.hpp"
 
 Editor::Editor() : window("Amuse Editor", 1280, 720)
 {
     logger.name = "AMUSE";
-    current_project_path = "assets/";
+    workspace_path = "C:/amuse/projects";
+    current_project_path = "";
+
+    if (!std::filesystem::exists(workspace_path))
+    {
+        std::filesystem::create_directories(workspace_path);
+    }
+}
+
+void Editor::create_project(const std::filesystem::path &path)
+{
+    std::filesystem::create_directory(path);
+    std::filesystem::create_directory(path / "assets");
+}
+
+void Editor::open_project(const std::filesystem::path &path)
+{
+    set_status([this, path](Editor *editor)
+               { ImGui::Text("Opening project %s", path.string().c_str()); });
+
+    current_project_path = path;
 }
 
 void Editor::open(const std::filesystem::path &path)
@@ -138,6 +66,84 @@ void Editor::open(const std::filesystem::path &path)
 void Editor::load_actor(const std::filesystem::path &path)
 {
     engine->load_actor(path);
+    set_edited(false);
+    set_status([this](Editor *editor)
+               { ImGui::Text("Loaded %s", engine->root_actor->path.c_str()); });
+}
+
+void Editor::main_menu_bar()
+{
+    static struct
+    {
+        bool open_new_project = false;
+    } state;
+
+    state = {};
+
+    if (ImGui::BeginMainMenuBar())
+    {
+        if (ImGui::BeginMenu("File"))
+        {
+            if (ImGui::MenuItem("New Project"))
+            {
+                state.open_new_project = true;
+            }
+
+            if (ImGui::MenuItem("Open Project"))
+            {
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::MenuItem("Exit"))
+            {
+                window.quit();
+            }
+            ImGui::EndMenu();
+        }
+
+        if (ImGui::BeginMenu("Windows"))
+        {
+            for (auto &pair : windows)
+            {
+                if (ImGui::MenuItem(pair.first.c_str(), NULL, pair.second.is_open))
+                {
+                    pair.second.is_open = !pair.second.is_open;
+                }
+            }
+            ImGui::EndMenu();
+        }
+
+        ImGui::EndMainMenuBar();
+    }
+
+    if (state.open_new_project)
+    {
+        ImGui::OpenPopup("New Project");
+    }
+
+    if (ImGui::BeginPopupModal("New Project", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+    {
+        static char project_name[128] = "";
+        ImGui::Image(ICON_FOLDER);
+        ImGui::SameLine();
+        ImGui::InputText("Project Name", project_name, IM_ARRAYSIZE(project_name));
+
+        if (ImGui::Button("Create", ImVec2(120, 0)))
+        {
+            std::filesystem::path project_path = workspace_path / project_name;
+
+            create_project(project_path);
+
+            project_name == "";
+
+            open_project(project_path);
+
+            ImGui::CloseCurrentPopup();
+        }
+
+        ImGui::EndPopup();
+    }
 }
 
 void Editor::run()
@@ -155,7 +161,6 @@ void Editor::run()
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    style_imgui();
 
     ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
@@ -163,6 +168,9 @@ void Editor::run()
 
     auto glsl_version = "#version 150";
     ImGui_ImplOpenGL3_Init(glsl_version);
+
+    style_imgui();
+    load_icons_texture();
 
     // Regist native windows
     register_window<HierarchyEditor>("Hierarchy");
@@ -179,32 +187,30 @@ void Editor::run()
 
         window.poll_events(es);
 
-        if (ImGui::BeginMainMenuBar())
+        if (ImGui::Shortcut(ImGuiMod_Ctrl + ImGuiKey_S, ImGuiInputFlags_RouteAlways))
         {
-            if (ImGui::BeginMenu("File"))
-            {
-                ImGui::Separator();
-                if (ImGui::MenuItem("Exit"))
-                {
-                    window.quit();
-                }
-                ImGui::EndMenu();
-            }
+            logger.info("Saving project");
 
-            if (ImGui::BeginMenu("Windows"))
+            if (engine->root_actor != nullptr)
             {
-                for (auto &pair : windows)
-                {
-                    if (ImGui::MenuItem(pair.first.c_str(), NULL, pair.second.is_open))
-                    {
-                        pair.second.is_open = !pair.second.is_open;
-                    }
-                }
-                ImGui::EndMenu();
+                set_status([](Editor *editor)
+                           { ImGui::Text("Saving..."); });
+                engine->root_actor->save();
+                set_edited(false);
+                set_status([this](Editor *editor)
+                           { ImGui::Text("Saved %s", engine->root_actor->path.c_str()); });
             }
-
-            ImGui::EndMainMenuBar();
         }
+
+        static bool show_demo_window = false;
+
+        if (ImGui::Shortcut(ImGuiKey_F1, ImGuiInputFlags_RouteAlways))
+            show_demo_window = !show_demo_window;
+
+        if (show_demo_window)
+            ImGui::ShowDemoWindow(&show_demo_window);
+
+        main_menu_bar();
 
         ImGuiViewport *viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->Pos);
@@ -222,6 +228,7 @@ void Editor::run()
             ImGuiWindowFlags_NoBringToFrontOnFocus;
 
         ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.08f, 0.08f, 0.08f, 1.00f));
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
         ImGui::Begin("Editor", 0, windowFlags);
 
         ImGuiID dockspace_id = ImGui::GetID("Editor");
@@ -248,6 +255,7 @@ void Editor::run()
 
         ImGui::End();
         ImGui::PopStyleColor();
+        ImGui::PopStyleVar();
 
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_MenuBar;
         float height = ImGui::GetFrameHeight();
@@ -256,7 +264,10 @@ void Editor::run()
         {
             if (ImGui::BeginMenuBar())
             {
-                ImGui::Text("Status bar");
+                if (status_callback)
+                {
+                    status_callback(this);
+                }
                 ImGui::EndMenuBar();
             }
             ImGui::End();
@@ -276,11 +287,33 @@ void Editor::run()
             pair.second.window->on_pop_style();
         }
 
-        ImGui::ShowDemoWindow();
-
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         window.swap_buffers();
     }
+}
+
+void Editor::set_edited(bool edited)
+{
+    std::string title = "Amuse Editor";
+
+    if (engine->root_actor != nullptr)
+    {
+        title += " - " + engine->root_actor->name;
+    }
+
+    if (edited)
+    {
+        window.set_title(title + " *");
+    }
+    else
+    {
+        window.set_title(title);
+    }
+}
+
+void Editor::set_status(Function<void(Editor *editor)> callback)
+{
+    status_callback = callback;
 }

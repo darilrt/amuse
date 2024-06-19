@@ -1,5 +1,5 @@
 path = "assets/test.actor"
-name = "Test Actor"
+name = "Actor 1"
 
 [[children]]
 path = ""
@@ -7,16 +7,16 @@ name = "Test1"
 
 [[children.children]]
 path = ""
-name = "Child"
+name = "Childasdasd"
 
 [[children]]
 path = ""
 name = "Test2"
 [[children]]
 path = ""
-name = "New Actor"
+name = "Test3"
 
 [[children.children]]
 path = ""
-name = "New Actor"
+name = "Child"
 

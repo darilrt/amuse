@@ -4,6 +4,7 @@
 #include "editor/windows/files.hpp"
 #include "amuse/gui.hpp"
 #include "amuse/editor.hpp"
+#include "icons.hpp"
 
 static std::filesystem::path rename_path;
 
@@ -64,14 +65,11 @@ void file_context_menu_helper(std::filesystem::path path, Editor *editor)
 {
     if (ImGui::BeginPopupContextItem())
     {
-        if (ImGui::MenuItem("Open") && std::filesystem::is_regular_file(path))
+        if (std::filesystem::is_regular_file(path) && ImGui::MenuItem("Open"))
         {
             editor->open(path);
         }
-        if (ImGui::MenuItem("Copy Path"))
-        {
-            ImGui::SetClipboardText(path.string().c_str());
-        }
+
         if (ImGui::BeginMenu("New"))
         {
             if (ImGui::MenuItem("Folder"))
@@ -98,6 +96,11 @@ void file_context_menu_helper(std::filesystem::path path, Editor *editor)
         if (ImGui::MenuItem("Delete"))
         {
             std::filesystem::remove(path);
+        }
+
+        if (ImGui::MenuItem("Copy Path"))
+        {
+            ImGui::SetClipboardText(path.string().c_str());
         }
 
         if (ImGui::MenuItem("Open Folder In Explorer"))
@@ -171,6 +174,14 @@ void draw_directory_helper(const std::filesystem::path &path, Editor *editor)
 
         file_context_menu_helper(path, editor);
 
+        if (!entry.exists())
+        {
+            if (open)
+                ImGui::TreePop();
+
+            continue;
+        }
+
         if (open)
         {
             draw_directory_helper(entry.path(), editor);
@@ -185,5 +196,65 @@ void FilesEditor::init()
 
 void FilesEditor::on_gui()
 {
-    draw_directory_helper(editor->current_project_path, editor);
+    if (editor->current_project_path.empty())
+    {
+        ImGui::Text("No project loaded");
+        return;
+    }
+
+    if (!std::filesystem::exists(editor->current_project_path / "assets"))
+    {
+        ImGui::Text("Invalid project path");
+        return;
+    }
+
+    constexpr ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow |
+                                         ImGuiTreeNodeFlags_OpenOnDoubleClick |
+                                         ImGuiTreeNodeFlags_SpanFullWidth;
+
+    const std::filesystem::path asset_path = editor->current_project_path / "assets";
+
+    bool open = ImGui::TreeNodeEx("assets", flags);
+
+    if (ImGui::BeginPopupContextItem())
+    {
+        if (ImGui::BeginMenu("New"))
+        {
+            if (ImGui::MenuItem("Folder"))
+            {
+                std::filesystem::create_directory(asset_path / "New Folder");
+                rename_path = asset_path / "New Folder";
+            }
+
+            ImGui::EndMenu();
+        }
+
+        if (ImGui::MenuItem("Copy Path"))
+        {
+            ImGui::SetClipboardText(asset_path.string().c_str());
+        }
+
+        if (ImGui::MenuItem("Open Folder In Explorer"))
+        {
+            const std::filesystem::path folder_path = std::filesystem::current_path() / asset_path.parent_path();
+            const std::filesystem::path c = std::filesystem::weakly_canonical(std::filesystem::path(folder_path));
+
+#ifdef _WIN32
+            system(("explorer /separate /select,\"" + c.string() + "\"").c_str());
+#elif __APPLE__
+            system(("open " + c.string()).c_str());
+#elif __linux__
+            system(("xdg-open " + c.string()).c_str());
+#endif
+        }
+
+        ImGui::EndPopup();
+    }
+
+    if (open)
+    {
+        draw_directory_helper(asset_path, editor);
+
+        ImGui::TreePop();
+    }
 }

@@ -1,6 +1,7 @@
 #include "editor/windows/hierarchy.hpp"
 #include "amuse/gui.hpp"
 #include "amuse/editor.hpp"
+#include "icons.hpp"
 
 #include "icons_fork_awesome.hpp"
 
@@ -16,8 +17,7 @@ void hierarchy_context_menu_helper(Shared<Actor> actor, Editor *editor)
             actor->children.push_back(new_actor);
             editor->selected_actor = new_actor;
 
-            if (!editor->engine->root_actor->path.empty())
-                editor->engine->root_actor->save();
+            editor->set_edited();
         }
 
         if (ImGui::MenuItem("Remove"))
@@ -35,6 +35,8 @@ void hierarchy_context_menu_helper(Shared<Actor> actor, Editor *editor)
             {
                 editor->engine->root_actor = nullptr;
             }
+
+            editor->set_edited();
         }
 
         ImGui::EndPopup();
@@ -86,6 +88,7 @@ void HierarchyEditor::init()
 
 void HierarchyEditor::on_gui()
 {
+
     if (editor->engine->root_actor == nullptr)
     {
         ImGui::Text("No actor loaded");

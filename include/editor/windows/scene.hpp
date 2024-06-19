@@ -8,4 +8,8 @@ public:
     void init() override;
 
     void on_gui() override;
+
+    void on_push_style() override;
+
+    void on_pop_style() override;
 };
