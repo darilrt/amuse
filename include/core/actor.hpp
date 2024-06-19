@@ -10,7 +10,8 @@
 class Actor
 {
 public:
-    std::string name;
+    std::string name = "Empty Actor";
+    std::string path = "";
 
     std::vector<Shared<Component>> components;
     Shared<Actor> parent;
@@ -21,4 +22,6 @@ public:
     AMUSE_API void update();
 
     AMUSE_API Shared<Actor> load(const std::filesystem::path &path);
+
+    AMUSE_API void save();
 };

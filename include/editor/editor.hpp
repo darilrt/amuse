@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <string>
 
+#include "engine/window.hpp"
 #include "core/engine.hpp"
 #include "core/actor.hpp"
 #include "editor/editor_window.hpp"
@@ -18,10 +19,13 @@ struct EditorWindowState
 class Editor
 {
 public:
+    Window window;
     Shared<Actor> selected_actor;
     std::string current_project_path;
     Engine *engine;
     std::unordered_map<std::string, EditorWindowState> windows;
+
+    Editor();
 
     template <typename T>
     void register_window(const std::string &name)

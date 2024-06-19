@@ -14,6 +14,10 @@ void hierarchy_context_menu_helper(Shared<Actor> actor, Editor *editor)
             new_actor->name = "New Actor";
             new_actor->parent = actor;
             actor->children.push_back(new_actor);
+            editor->selected_actor = new_actor;
+
+            if (!editor->engine->root_actor->path.empty())
+                editor->engine->root_actor->save();
         }
 
         if (ImGui::MenuItem("Remove"))

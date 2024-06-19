@@ -1,1 +1,22 @@
+path = "assets/test.actor"
 name = "Test Actor"
+
+[[children]]
+path = ""
+name = "Test1"
+
+[[children.children]]
+path = ""
+name = "Child"
+
+[[children]]
+path = ""
+name = "Test2"
+[[children]]
+path = ""
+name = "New Actor"
+
+[[children.children]]
+path = ""
+name = "New Actor"
+

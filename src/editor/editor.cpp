@@ -1,5 +1,4 @@
 #include "editor/editor.hpp"
-#include "engine/window.hpp"
 #include "engine/event_system.hpp"
 #include "engine/input.hpp"
 #include "engine/graphics/gfx.hpp"
@@ -109,6 +108,12 @@ void style_imgui()
     colors[ImGuiCol_ModalWindowDimBg] = ImVec4(1.00f, 0.00f, 0.00f, 0.35f);
 }
 
+Editor::Editor() : window("Amuse Editor", 1280, 720)
+{
+    logger.name = "AMUSE";
+    current_project_path = "assets/";
+}
+
 void Editor::open(const std::filesystem::path &path)
 {
     logger.info("Opening: {}", path.string());
@@ -122,6 +127,11 @@ void Editor::open(const std::filesystem::path &path)
     if (ext == ".actor")
     {
         load_actor(path);
+
+        if (engine->root_actor != nullptr)
+        {
+            window.set_title("Amuse Editor - " + engine->root_actor->name);
+        }
     }
 }
 
@@ -134,10 +144,6 @@ void Editor::run()
 {
     engine = new Engine();
 
-    logger.name = "AMUSE";
-    current_project_path = "assets/";
-
-    Window window("Editor", 1280, 720);
     window.set_resizable(true);
     // window.maximize();
     window.set_vsync(VSync::On);
