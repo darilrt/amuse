@@ -24,13 +24,19 @@ void SceneEditor::on_gui()
     start.y += 10;
     ImGui::SetCursorPos(start);
 
-    if (ImGui::ImageButton(ICON_OBJECT))
+    if (ImGui::ImageButton(ICON_PLACEHOLDER))
     {
     }
 
     ImGui::SameLine();
 
-    if (ImGui::ImageButton(ICON_FOLDER))
+    if (ImGui::ImageButton(ICON_PLACEHOLDER))
+    {
+    }
+
+    ImGui::SameLine();
+
+    if (ImGui::ImageButton(ICON_PLACEHOLDER))
     {
     }
 }

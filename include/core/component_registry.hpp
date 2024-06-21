@@ -20,7 +20,13 @@ public:
     template <typename T>
     void register_component(const std::string &name)
     {
-        register_component(name, []()
-                           { return new_shared<T>(); });
+        register_component(
+            name,
+            [name]()
+            {
+                Shared<Component> c = new_shared<T>();
+                c->_name = name;
+                return c;
+            });
     }
 };

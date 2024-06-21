@@ -10,4 +10,6 @@ public:
     Quat rotation;
 
     Transform();
+
+    void on_inspector() override;
 };

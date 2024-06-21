@@ -1,6 +1,7 @@
 #include "logger.hpp"
 #include "core/actor.hpp"
 #include "toml.hpp"
+#include "core/engine.hpp"
 
 void Actor::start()
 {
@@ -28,7 +29,7 @@ void Actor::update()
     }
 }
 
-Shared<Actor> load_actor_helper(const toml::value &data)
+Shared<Actor> load_actor_helper(const toml::value &data, Engine *engine)
 {
     Shared<Actor> actor = new_shared<Actor>();
 
@@ -41,14 +42,27 @@ Shared<Actor> load_actor_helper(const toml::value &data)
     if (!actor->path.empty())
         logger.info("Loading actor: {}", actor->path);
 
+    if (data.contains("components"))
+    {
+        auto components = toml::find(data, "components");
+
+        for (auto &component_data : components.as_array())
+        {
+            std::string component_name = toml::find<std::string>(component_data, "name");
+            Shared<Component> component = engine->component_registry->create_component(component_name);
+            actor->add_component(component);
+        }
+    }
+
     if (data.contains("children"))
     {
         auto children = toml::find(data, "children");
 
         for (auto &child_data : children.as_array())
         {
-            Shared<Actor> child = load_actor_helper(child_data);
+            Shared<Actor> child = load_actor_helper(child_data, engine);
             child->parent = actor;
+            child->engine = actor->engine;
             actor->children.push_back(child);
         }
     }
@@ -56,11 +70,11 @@ Shared<Actor> load_actor_helper(const toml::value &data)
     return actor;
 }
 
-Shared<Actor> Actor::load(const std::filesystem::path &path)
+Shared<Actor> Actor::load(const std::filesystem::path &path, Engine *engine)
 {
     auto data = toml::parse(path.string());
 
-    Shared<Actor> actor = load_actor_helper(data);
+    Shared<Actor> actor = load_actor_helper(data, engine);
     actor->path = path.string();
 
     return actor;
@@ -71,12 +85,15 @@ void save_actor_helper(Actor *actor, toml::value &data)
     data["name"] = actor->name;
     data["path"] = actor->path;
 
-    // for (auto &component : actor->components)
-    // {
-    //     toml::value component_data;
-    //     component->on_inspector(component_data);
-    //     data["components"].push_back(component_data);
-    // }
+    data["components"] = toml::array{};
+
+    for (auto &component : actor->components)
+    {
+        toml::value component_data;
+        component_data["name"] = component->_name;
+
+        data["components"].push_back(component_data);
+    }
 
     if (actor->children.size() == 0)
         return;
@@ -100,4 +117,29 @@ void Actor::save()
     std::ofstream file(path);
     file << data;
     file.close();
+}
+
+void Actor::add_component(Shared<Component> component)
+{
+    component->actor = this;
+    components.push_back(component);
+}
+
+Shared<Component> Actor::get_component(const std::string &name)
+{
+    for (auto &component : components)
+    {
+        if (component->_name == name)
+            return component;
+    }
+
+    return nullptr;
+}
+
+void Actor::remove_component(Shared<Component> component)
+{
+    auto it = std::find(components.begin(), components.end(), component);
+
+    if (it != components.end())
+        components.erase(it);
 }

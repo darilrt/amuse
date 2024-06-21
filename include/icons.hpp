@@ -8,6 +8,11 @@ extern float icon_size;
 
 void load_icons_texture();
 
-#define ICON_FOLDER (void *)icons_texture->image.id, ImVec2(icon_size, icon_size), ImVec2(0.0, 1.0), ImVec2(0.5, 0.0)
+#define ICON_CROSS (void *)icons_texture->image.id, ImVec2(icon_size, icon_size), ImVec2(0.0, 1.0), ImVec2(0.25, 0.0)
 
-#define ICON_OBJECT (void *)icons_texture->image.id, ImVec2(icon_size, icon_size), ImVec2(0.5, 1.0), ImVec2(1.0, 0.0)
+#define ICON_FOLDER (void *)icons_texture->image.id, ImVec2(icon_size, icon_size), ImVec2(0.25, 1.0), ImVec2(0.5, 0.0)
+
+#define ICON_OBJECT (void *)icons_texture->image.id, ImVec2(icon_size, icon_size), ImVec2(0.5, 1.0), ImVec2(0.75, 0.0)
+
+#define ICON_PLACEHOLDER (void *)icons_texture->image.id, ImVec2(icon_size, icon_size), ImVec2(0.75, 1.0), ImVec2(1.0, 0.0)
+

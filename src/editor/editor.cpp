@@ -60,6 +60,8 @@ void Editor::open(const std::filesystem::path &path)
         {
             window.set_title("Amuse Editor - " + engine->root_actor->name);
         }
+
+        selected_actor = engine->root_actor;
     }
 }
 
@@ -76,6 +78,7 @@ void Editor::main_menu_bar()
     static struct
     {
         bool open_new_project = false;
+        bool open_project = false;
     } state;
 
     state = {};
@@ -84,13 +87,14 @@ void Editor::main_menu_bar()
     {
         if (ImGui::BeginMenu("File"))
         {
-            if (ImGui::MenuItem("New Project"))
+            if (ImGui::MenuItem("New Project", "Ctrl+N"))
             {
                 state.open_new_project = true;
             }
 
-            if (ImGui::MenuItem("Open Project"))
+            if (ImGui::MenuItem("Open Project", "Ctrl+O"))
             {
+                state.open_project = true;
             }
 
             ImGui::Separator();
@@ -142,6 +146,50 @@ void Editor::main_menu_bar()
             ImGui::CloseCurrentPopup();
         }
 
+        ImGui::SameLine();
+
+        if (ImGui::Button("Cancel", ImVec2(120, 0)))
+        {
+            ImGui::CloseCurrentPopup();
+        }
+
+        ImGui::EndPopup();
+    }
+
+    if (state.open_project)
+    {
+        ImGui::OpenPopup("Open Project");
+    }
+
+    if (ImGui::BeginPopupModal("Open Project", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_Popup))
+    {
+        std::vector<char *> projects;
+
+        for (auto &entry : std::filesystem::directory_iterator(workspace_path))
+        {
+            if (entry.is_directory())
+            {
+                projects.push_back((char *)entry.path().string().c_str());
+            }
+        }
+
+        static int item_current = 0;
+
+        ImGui::ListBox("Projects", &item_current, projects.data(), projects.size());
+
+        if (ImGui::Button("Open", ImVec2(120, 0)))
+        {
+            open_project(projects[item_current]);
+            ImGui::CloseCurrentPopup();
+        }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Cancel", ImVec2(120, 0)))
+        {
+            ImGui::CloseCurrentPopup();
+        }
+
         ImGui::EndPopup();
     }
 }
@@ -177,6 +225,9 @@ void Editor::run()
     register_window<FilesEditor>("Files");
     register_window<SceneEditor>("Scene");
     register_window<InspectorEditor>("Inspector");
+
+    /// DEBUG PROPOSAL
+    open_project("C:/amuse/projects/Test");
 
     while (window.is_open)
     {
