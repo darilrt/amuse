@@ -993,6 +993,37 @@ public:
         return i * b.i + j * b.j + k * b.k + r * b.r;
     }
 
+    Vec3 to_euler() const
+    {
+        float sqw = r * r;
+        float sqx = i * i;
+        float sqy = j * j;
+        float sqz = k * k;
+        float unit = sqx + sqy + sqz + sqw;
+        float test = i * j + k * r;
+
+        if (test > 0.499f * unit)
+        {
+            return Vec3(
+                0.0f,
+                2.0f * atan2(i, r),
+                3.14159265358979323846f / 2.0f);
+        }
+
+        if (test < -0.499f * unit)
+        {
+            return Vec3(
+                0.0f,
+                -2.0f * atan2(i, r),
+                -3.14159265358979323846f / 2.0f);
+        }
+
+        return Vec3(
+            atan2(2.0f * j * r - 2.0f * i * k, sqx - sqy - sqz + sqw),
+            atan2(2.0f * i * r - 2.0f * j * k, -sqx + sqy - sqz + sqw),
+            asin(2.0f * test / unit));
+    }
+
     static Quat lerp(Quat &a, Quat &b, float t)
     {
         return (a * (1.0f - t) + b * t).normalize();
@@ -1314,8 +1345,8 @@ namespace math
     // float radians = math::rad(90.0f);
     // radians == 1.57079632679f // true
     // ```
-    // template <typename T>
-    inline double rad(double value)
+    template <typename T>
+    inline T rad(T value)
     {
         return (value * pi) / 180.0f;
     }

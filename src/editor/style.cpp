@@ -4,12 +4,10 @@
 void style_imgui()
 {
     auto &io = ImGui::GetIO();
-    io.Fonts->AddFontFromFileTTF("assets/fonts/JetBrainsMono-Medium.ttf", 20.0f);
-
-    float base_font_size = 13.0f;                        // 13.0f is the size of the default font. Change to the font size you use.
-    float icon_font_size = base_font_size * 2.0f / 3.0f; // FontAwesome fonts need to have their sizes reduced by 2.0f/3.0f in order to align correctly
+    io.Fonts->AddFontFromFileTTF("assets/fonts/JetBrainsMono-Medium.ttf", 18.0f);
 
     ImGuiStyle *style = &ImGui::GetStyle();
+
     style->WindowRounding = 4.0f;
     style->FramePadding = ImVec2(5.0f, 5.0f);
     style->FrameRounding = 4.0f;

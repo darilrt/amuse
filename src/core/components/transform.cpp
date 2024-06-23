@@ -1,11 +1,20 @@
 #include "core/components/transform.hpp"
-#include "imgui/imgui.h"
+#include "editor/ui.hpp"
 
 Transform::Transform()
 {
 }
 
+float center = 0.35;
+
 void Transform::on_inspector()
 {
-    ImGui::Text("Position");
+    ui::InputVector3("Position", &position.x);
+
+    if (ui::InputVector3("Rotation", &_euler_angles.x))
+    {
+        rotation = Quat::from_euler(math::rad(_euler_angles));
+    }
+
+    ui::InputVector3("Scale", &scale.x);
 }
