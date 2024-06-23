@@ -4,7 +4,7 @@
 void style_imgui()
 {
     auto &io = ImGui::GetIO();
-    io.Fonts->AddFontFromFileTTF("assets/fonts/JetBrainsMono-Medium.ttf", 18.0f);
+    io.Fonts->AddFontFromFileTTF("assets/fonts/JetBrainsMono-Medium.ttf", 16.0f);
 
     ImGuiStyle *style = &ImGui::GetStyle();
 
