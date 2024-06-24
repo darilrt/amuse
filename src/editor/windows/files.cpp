@@ -84,26 +84,18 @@ void file_context_menu_helper(std::filesystem::path path, Editor *editor)
                 rename_path = path / "New Folder";
             }
 
-            // if (ImGui::MenuItem("C++ Component"))
-            // {
-            //     if (std::filesystem::is_regular_file(path))
-            //     {
-            //         path = path.parent_path();
-            //     }
+            if (ImGui::MenuItem("Empty Actor"))
+            {
+                if (std::filesystem::is_regular_file(path))
+                {
+                    path = path.parent_path();
+                }
 
-            //     std::ofstream file(path / "new_component.cpp");
-            //     file << "#include <amuse/engine.hpp>\n\n";
-            //     file << "class NewComponent : public Component\n";
-            //     file << "{\n";
-            //     file << "public:\n";
-            //     file << "    void on_start() override\n";
-            //     file << "    {\n";
-            //     file << "    }\n";
-            //     file << "};\n";
-            //     file.close();
+                std::ofstream file(path / "new_actor.actor");
+                file.close();
 
-            //     rename_path = path / "new_component.cpp";
-            // }
+                rename_path = path / "new_actor.actor";
+            }
 
             ImGui::EndMenu();
         }
@@ -246,6 +238,19 @@ void FilesEditor::on_gui()
             {
                 std::filesystem::create_directory(asset_path / "New Folder");
                 rename_path = asset_path / "New Folder";
+            }
+
+            if (ImGui::MenuItem("Empty Actor"))
+            {
+                if (std::filesystem::is_regular_file(path))
+                {
+                    path = path.parent_path();
+                }
+
+                std::ofstream file(path / "new_actor.actor");
+                file.close();
+
+                rename_path = path / "new_actor.actor";
             }
 
             ImGui::EndMenu();
