@@ -13,7 +13,7 @@ public:
     Ptr<Editor> editor;
     std::string name;
 
-    virtual void init() = 0;
+    virtual void on_init() = 0;
 
     virtual void on_gui() = 0;
 

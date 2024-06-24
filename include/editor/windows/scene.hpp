@@ -5,7 +5,7 @@
 class SceneEditor : public EditorWindow
 {
 public:
-    void init() override;
+    void on_init() override;
 
     void on_gui() override;
 

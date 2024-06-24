@@ -13,6 +13,8 @@
 #include "editor/windows/files.hpp"
 #include "editor/windows/scene.hpp"
 #include "editor/windows/inspector.hpp"
+#include "editor/windows/preferences.hpp"
+#include "editor/windows/visual_component.hpp"
 
 #include "icons.hpp"
 
@@ -63,6 +65,14 @@ void Editor::open(const std::filesystem::path &path)
 
         selected_actor = engine->root_actor;
     }
+    else if (ext == ".cpp" || ext == ".h")
+    {
+        system(("code " + path.string()).c_str());
+    }
+    else
+    {
+        // Open in default editor
+    }
 }
 
 void Editor::load_actor(const std::filesystem::path &path)
@@ -95,6 +105,12 @@ void Editor::main_menu_bar()
             if (ImGui::MenuItem("Open Project", "Ctrl+O"))
             {
                 state.open_project = true;
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::MenuItem("Preferences"))
+            {
             }
 
             ImGui::Separator();
@@ -225,6 +241,8 @@ void Editor::run()
     register_window<FilesEditor>("Files");
     register_window<SceneEditor>("Scene");
     register_window<InspectorEditor>("Inspector");
+    register_window<PreferencesEditor>("Preferences");
+    register_window<VisualComponentEditor>("Visual Component");
 
     /// DEBUG PROPOSAL
     open_project("C:/amuse/projects/Test");

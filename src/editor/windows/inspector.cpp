@@ -44,7 +44,7 @@ void draw_component_helpers(Actor *actor, Editor *editor)
     }
 }
 
-void InspectorEditor::init()
+void InspectorEditor::on_init()
 {
 }
 

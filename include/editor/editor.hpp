@@ -9,11 +9,17 @@
 #include "core/actor.hpp"
 #include "editor/editor_window.hpp"
 #include "types.hpp"
+#include "editor/compiler.hpp"
 
 struct EditorWindowState
 {
     bool is_open = true;
     Shared<EditorWindow> window;
+};
+
+struct EditorPreferences
+{
+    std::string external_editor = "code";
 };
 
 class Editor
@@ -26,6 +32,8 @@ public:
     Engine *engine;
     std::unordered_map<std::string, EditorWindowState> windows;
     Function<void(Editor *editor)> status_callback;
+    EditorPreferences preferences;
+    Compiler compiler;
 
     Editor();
 

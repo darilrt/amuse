@@ -82,7 +82,7 @@ void draw_actor_tree(Shared<Actor> actor, Editor *editor)
     }
 }
 
-void HierarchyEditor::init()
+void HierarchyEditor::on_init()
 {
 }
 

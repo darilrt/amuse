@@ -2,7 +2,7 @@
 #include "amuse/gui.hpp"
 #include "icons.hpp"
 
-void SceneEditor::init()
+void SceneEditor::on_init()
 {
 }
 

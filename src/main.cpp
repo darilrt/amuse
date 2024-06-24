@@ -2,8 +2,8 @@
 
 int main()
 {
-    Editor editor;
-    editor.run();
+    Editor *editor = new Editor();
+    editor->run();
 
     return 0;
 }

@@ -2,7 +2,7 @@
 
 #include "editor/editor_window.hpp"
 
-class FilesEditor : public EditorWindow
+class PreferencesEditor : public EditorWindow
 {
 public:
     void on_init() override;
