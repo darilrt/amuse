@@ -31,7 +31,7 @@ void VisualComponentEditor::on_gui()
 
     constexpr ImU32 GRID_COLOR = IM_COL32(20, 20, 20, 60);
 
-    ImVec2 position = ImVec2(0, 0);
+    static ImVec2 position = ImVec2(0, 0);
     float size = 32.0f;
 
     for (float x = fmodf(-position.x, size); x < io.DisplaySize.x; x += size)
@@ -42,5 +42,27 @@ void VisualComponentEditor::on_gui()
     for (float y = fmodf(-position.y, size); y < io.DisplaySize.y; y += size)
     {
         draw_list->AddLine(ImVec2(start.x, start.y + y), ImVec2(end.x, start.y + y), GRID_COLOR);
+    }
+
+    // handle dragging
+    ImGui::SetCursorScreenPos(start);
+    ImGui::InvisibleButton("canvas", ImVec2(pos.x - start.x, pos.y - start.y), ImGuiButtonFlags_MouseButtonMask_);
+
+    const bool is_hovered = ImGui::IsItemHovered();
+    const bool is_active = ImGui::IsItemActive();
+
+    if (ImGui::IsMouseDragging(ImGuiMouseButton_Middle, 0.0f))
+    {
+        position.x -= io.MouseDelta.x;
+        position.y -= io.MouseDelta.y;
+
+        // if (is_dragging)
+        // {
+        // for (Node *node : selectedNodes)
+        // {
+        //     node->position.x -= io.MouseDelta.x;
+        //     node->position.y -= io.MouseDelta.y;
+        // }
+        // }
     }
 }
