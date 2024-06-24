@@ -242,15 +242,10 @@ void FilesEditor::on_gui()
 
             if (ImGui::MenuItem("Empty Actor"))
             {
-                if (std::filesystem::is_regular_file(path))
-                {
-                    path = path.parent_path();
-                }
-
-                std::ofstream file(path / "new_actor.actor");
+                std::ofstream file(asset_path / "new_actor.actor");
                 file.close();
 
-                rename_path = path / "new_actor.actor";
+                rename_path = asset_path / "new_actor.actor";
             }
 
             ImGui::EndMenu();
