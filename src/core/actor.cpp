@@ -98,7 +98,7 @@ void save_actor_helper(Actor *actor, toml::value &data)
     if (actor->children.size() == 0)
         return;
 
-    data["children"] = toml::array{}; // [1
+    data["children"] = toml::array{};
 
     for (auto &child : actor->children)
     {

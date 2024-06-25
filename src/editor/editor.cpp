@@ -14,7 +14,7 @@
 #include "editor/windows/scene.hpp"
 #include "editor/windows/inspector.hpp"
 #include "editor/windows/preferences.hpp"
-#include "editor/windows/visual_component.hpp"
+#include "visual_editor/visual_component.hpp"
 
 #include "icons.hpp"
 
